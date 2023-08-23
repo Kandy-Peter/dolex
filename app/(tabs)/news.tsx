@@ -1,14 +1,13 @@
-import { COLORS } from "@/constants/theme";
-import { useState } from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
-// import EditScreenInfo from "../../src/components/EditScreenInfo";
+import EditScreenInfo from "../../src/components/EditScreenInfo";
 
-export default function TabHomeScreen() {
+export default function TabNewsScreen() {
   return (
     <View style={styles.container}>
-      <Text className="font-bold text-md color-[#8c0e]">Dolex</Text>
+      <Text style={styles.title}>News</Text>
       <View style={styles.separator} />
+      <EditScreenInfo path="app/(tabs)/two.tsx" />
     </View>
   );
 }
@@ -18,7 +17,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: COLORS.white,
   },
   title: {
     fontSize: 20,
