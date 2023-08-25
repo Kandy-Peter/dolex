@@ -1,11 +1,17 @@
 const COLORS = {
+  primary: "#D62645",
   primaryBlue: "#0494de",
   secondaryBlue: "#005D8D",
   primaryGreen: "#00BFA6",
   primaryGray: "#A7A7A7",
   secondaryGray: "#D8D8D8",
-  gray: "#C1C0C8",
-  darkGray: "#7e7e7e",
+  gray: "#7e7e7e",
+  darkGray: "#454545",
+  blueOpacity: "#0494de20",
+  redOpacity: "#D6264520",
+  greenOpacity: "#00BFA620",
+  orangeOpacity: "#FFA50020",
+  green: "#31B700",
 
   white: "#F3F4F8",
   lightWhite: "#FAFAFC",
@@ -17,6 +23,7 @@ const FONT = {
   regular: "DMregularLato",
   bold: "DMboldLato",
   black: "DMblackLato",
+  title: "DMAudiowide",
 };
 
 const SIZES = {

@@ -1,8 +1,9 @@
-import { SafeAreaView } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
+import { View, Image } from "react-native";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -19,10 +20,11 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    DMlightLato: require("./../src/constants/fonts/Lato-Light.ttf"),
-    DMregularLato: require("./../src/constants/fonts/Lato-Regular.ttf"),
-    DMboldLato: require("./../src/constants/fonts/Lato-Bold.ttf"),
-    DMblackLato: require("./../src/constants/fonts/Lato-Black.ttf"),
+    DMlightLato: require("./../src/assets/fonts/Lato-Light.ttf"),
+    DMregularLato: require("./../src/assets/fonts/Lato-Regular.ttf"),
+    DMboldLato: require("./../src/assets/fonts/Lato-Bold.ttf"),
+    DMblackLato: require("./../src/assets/fonts/Lato-Black.ttf"),
+    DMAudiowide: require("./../src/assets/fonts/Audiowide-Regular.ttf"),
     ...FontAwesome.font,
   });
 
@@ -41,7 +43,21 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "#67b",
+      }}
+    >
+      <StatusBar style="dark" />
+      <Image
+        source={require("./../src/assets/images/primary_bg.png")}
+        className="absolute h-full w-full"
+      />
+      <RootLayoutNav />
+    </View>
+  )
 }
 
 function RootLayoutNav() {
@@ -50,4 +66,5 @@ function RootLayoutNav() {
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="modal" options={{ presentation: "modal" }} />
     </Stack>
-);}
+  );
+}

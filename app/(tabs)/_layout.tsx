@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, Tabs } from "expo-router";
-import { Pressable } from "react-native";
+import { Pressable, View, Text } from "react-native";
 
 import styles from "../../src/assets/styles/tabs.style";
 
@@ -21,10 +21,12 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: COLORS.white,
+          backgroundColor: "#fff",
           borderTopWidth: 0,
+          boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
         },
-        tabBarActiveTintColor: COLORS.primaryBlue,
+        tabBarActiveTintColor: COLORS.primary,
+        tabBarInactiveTintColor: COLORS.primaryGray,
         headerTitle: "",
         headerStyle: { backgroundColor: COLORS.white },
         headerShadowVisible: false,
@@ -42,25 +44,37 @@ export default function TabLayout() {
             />
           ),
           headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <MaterialCommunityIcons
-                    name="help-rhombus"
-                    size={24}
-                    color={COLORS.darkGray}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
+            <View style={styles.headerRight}>
+              <Link href="/modal" asChild>
+                <Pressable>
+                  {({ pressed }) => (
+                    <MaterialCommunityIcons
+                      name="bell"
+                      size={24}
+                      color={COLORS.darkGray}
+                      style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                    />
+                  )}
+                </Pressable>
+              </Link>
+              <Link href="/modal" asChild>
+                <Pressable>
+                  {({ pressed }) => (
+                    <MaterialCommunityIcons
+                      name="help-rhombus"
+                      size={24}
+                      color={COLORS.darkGray}
+                      style={{ opacity: pressed ? 0.5 : 1 }}
+                    />
+                  )}
+                </Pressable>
+              </Link>
+            </View>
           ),
           headerLeft: () => (
-            <ScreenHeaderBtn
-              iconUrl={require("@/assets/images/default_profile.webp")}
-              dimension={30}
-              handlePress={() => {}}
-            />
+            <View>
+              <Text style={styles.headerTitle}>mago</Text>
+            </View>
           ),
         }}
       />

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View  } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 import EditScreenInfo from "../../src/components/EditScreenInfo";
 
@@ -6,9 +6,7 @@ export default function TabProfileScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab Two</Text>
-      <View
-        style={styles.separator}
-      />
+      <View style={styles.separator} />
       <EditScreenInfo path="app/(tabs)/two.tsx" />
     </View>
   );

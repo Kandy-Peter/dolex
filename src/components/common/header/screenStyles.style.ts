@@ -4,10 +4,10 @@ import { COLORS, FONT, SIZES } from "@/constants/theme";
 
 export default StyleSheet.create({
   btnContainer: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     margin: SIZES.medium,
-    backgroundColor: COLORS.white,
+    backgroundColor: "#fff",
     borderRadius: SIZES.small / 1.25,
     justifyContent: "center",
     alignItems: "center",

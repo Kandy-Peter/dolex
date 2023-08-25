@@ -113,9 +113,9 @@ module.exports = {
       //   inset: "inset 0px 18px 22px",
       //   darkinset: "0px 4px 4px inset",
       // },
-      // borderRadius: {
-      //   primary: "20px",
-      // },
+      borderRadius: {
+        primary: "20px",
+      },
     },
     colors: () => ({
       white: "#ffffff",

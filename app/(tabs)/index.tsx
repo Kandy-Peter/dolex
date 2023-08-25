@@ -1,14 +1,19 @@
-import { COLORS } from "@/constants/theme";
 import { useState } from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 
-// import EditScreenInfo from "../../src/components/EditScreenInfo";
+import CheapestRate from "@/components/Home/cheapest";
+import RateTable from "@/components/Home/tables";
+import Welcome from "@/components/Home/welcome";
+import { COLORS } from "@/constants/theme";
 
 export default function TabHomeScreen() {
   return (
     <View style={styles.container}>
-      <Text className="font-bold text-md color-[#8c0e]">Dolex</Text>
-      <View style={styles.separator} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Welcome />
+        <CheapestRate />
+        <RateTable />
+      </ScrollView>
     </View>
   );
 }
@@ -16,8 +21,6 @@ export default function TabHomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
     backgroundColor: COLORS.white,
   },
   title: {
