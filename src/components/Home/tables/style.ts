@@ -29,4 +29,11 @@ export default StyleSheet.create({
     color: COLORS.primary,
     underLineColor: COLORS.primary,
   },
+  tableBody: {
+    marginTop: SIZES.large,
+  },
+  tableRow: {
+    width: "100%",
+    borderBottomColor: COLORS.gray,
+  },
 });
