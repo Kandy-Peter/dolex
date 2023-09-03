@@ -10,7 +10,6 @@ This project is a boilerplate for React Native with Typescript and TailwindCSS.
 - [Yarn](https://yarnpkg.com/)
 - [Expo](https://docs.expo.io/workflow/expo-cli/)
 - [Expo Go](https://expo.io/client)
-- [TailwindCSS](https://tailwindcss.com/)
 
 ### Installation
 
