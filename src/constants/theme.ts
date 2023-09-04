@@ -12,7 +12,7 @@ const COLORS = {
   greenOpacity: "#00BFA620",
   orangeOpacity: "#FFA50020",
   green: "#31B700",
-
+  secondaryGreen: "#00a303d0",
   white: "#F3F4F8",
   lightWhite: "#FAFAFC",
   darkWhite: "#e0e0e0",

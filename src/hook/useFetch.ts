@@ -22,10 +22,9 @@ const useFetch = (endpoint: string, query?: object) => {
     setIsLoading(true);
 
     try {
-      const response = await axios.request(options);
-      console.log("response", response);
+      const { data } = await axios.request(options);
 
-      setData(response.data);
+      setData(data.data);
       setIsLoading(false);
     } catch (error) {
       setError(true);
@@ -38,7 +37,6 @@ const useFetch = (endpoint: string, query?: object) => {
 
   useEffect(() => {
     fecthData();
-    console.log("data", data);
   }, []);
 
   const refetch = () => {

@@ -12,7 +12,9 @@ import useFetch from "@/hook/useFetch";
 const RateTable = () => {
   const router = useRouter();
 
-  const { data, error, isLoading } = useFetch("markets");
+  const { data, error, isLoading } = useFetch("trades", {
+    country: "rwanda",
+  });
 
   return (
     <View style={styles.container}>

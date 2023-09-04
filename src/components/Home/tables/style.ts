@@ -27,7 +27,6 @@ export default StyleSheet.create({
     fontFamily: FONT.regular,
     fontSize: 16,
     color: COLORS.primary,
-    underLineColor: COLORS.primary,
   },
   tableBody: {
     marginTop: SIZES.large,
