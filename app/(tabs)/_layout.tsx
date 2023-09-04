@@ -28,8 +28,10 @@ export default function TabLayout() {
         tabBarActiveTintColor: COLORS.primary,
         tabBarInactiveTintColor: COLORS.primaryGray,
         headerTitle: "",
-        headerStyle: { backgroundColor: COLORS.white },
         headerShadowVisible: false,
+        headerStyle: {
+          backgroundColor: COLORS.primary,
+        },
       }}
     >
       <Tabs.Screen

@@ -3,15 +3,21 @@ import { StyleSheet } from "react-native";
 import { COLORS, SIZES, FONT } from "@/constants/theme";
 
 export default StyleSheet.create({
+  welcomeContainer: {
+    paddingHorizontal: SIZES.large,
+    paddingBottom: 60,
+    paddingTop: 25,
+    borderBottomEndRadius: 20,
+    borderBottomStartRadius: 20,
+  },
   container: {
     width: "100%",
   },
-
   slogan: {
     fontFamily: FONT.black,
-    color: COLORS.darkGray,
-    fontSize: 26,
-    width: "90%",
+    color: COLORS.white,
+    fontSize: 22,
+    width: "60%",
     paddingTop: SIZES.large,
   },
 
@@ -26,13 +32,11 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     backgroundColor: "#fff",
-    // // boxShadow: "rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px",
     marginRight: SIZES.small,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: SIZES.medium,
     height: "100%",
-
   },
   searchInput: {
     fontFamily: FONT.regular,
@@ -52,5 +56,32 @@ export default StyleSheet.create({
     width: "50%",
     height: "50%",
     tintColor: COLORS.white,
-  }
+  },
+  tradeTypeContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: SIZES.xxLarge,
+  },
+  tradeTypeBtn: {
+    width: "48%",
+    height: 50,
+    borderRadius: SIZES.medium,
+    justifyContent: "center",
+    alignItems: "center",
+    color: COLORS.white,
+    borderWidth: 2,
+    borderColor: COLORS.white,
+  },
+  tradeTypeBtnActive: {
+    backgroundColor: COLORS.white,
+    color: COLORS.primary,
+  },
+  tradeTypeBtnText: {
+    fontFamily: FONT.regular,
+    color: COLORS.white,
+  },
+  tradeTypeBtnTextActive: {
+    color: COLORS.primary,
+  },
 });

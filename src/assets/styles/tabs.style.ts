@@ -22,7 +22,7 @@ export default StyleSheet.create({
 
   headerTitle: {
     fontFamily: FONT.title,
-    color: COLORS.primary,
+    color: COLORS.lightWhite,
     fontSize: SIZES.xxLarge,
     marginLeft:  SIZES.large,
   },

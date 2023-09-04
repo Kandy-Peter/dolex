@@ -47,17 +47,13 @@ export default function RootLayout() {
     <View
       style={{
         flex: 1,
-        backgroundColor: "#67b",
+        // backgroundColor: "#D62645",
       }}
     >
-      <StatusBar style="dark" />
-      <Image
-        source={require("./../src/assets/images/primary_bg.png")}
-        className="absolute h-full w-full"
-      />
+      <StatusBar style="light" />
       <RootLayoutNav />
     </View>
-  )
+  );
 }
 
 function RootLayoutNav() {

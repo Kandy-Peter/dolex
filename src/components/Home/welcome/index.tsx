@@ -21,7 +21,7 @@ const Welcome = () => {
   const [activeType, setActiveType] = useState("Buy");
 
   return (
-    <View style={{ paddingHorizontal: SIZES.large }}>
+    <View style={styles.welcomeContainer}>
       <View style={styles.container}>
         <Text style={styles.slogan}>Empowering traders, one App at a time</Text>
       </View>
@@ -37,6 +37,27 @@ const Welcome = () => {
           />
           <Ionicons name="scan-circle" size={28} color={COLORS.primaryGreen} />
         </View>
+      </View>
+      <View style={styles.tradeTypeContainer}>
+        {tradeTypes.map((type) => (
+          <Pressable
+            key={type}
+            style={[
+              styles.tradeTypeBtn,
+              activeType === type && styles.tradeTypeBtnActive,
+            ]}
+            onPress={() => setActiveType(type)}
+          >
+            <Text
+              style={[
+                styles.tradeTypeBtnText,
+                activeType === type && styles.tradeTypeBtnTextActive,
+              ]}
+            >
+              {type}
+            </Text>
+          </Pressable>
+        ))}
       </View>
     </View>
   );
