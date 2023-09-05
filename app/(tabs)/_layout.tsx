@@ -56,22 +56,7 @@ export default function TabLayout() {
           ),
           headerRight: () => (
             <View style={styles.headerRight}>
-              {/* <Link href="/modal" asChild>
-                <Pressable>
-                  {({ pressed }) => (
-                    <MaterialCommunityIcons
-                      name="bell"
-                      size={24}
-                      color={COLORS.darkGray}
-                      style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                    />
-                  )}
-                </Pressable>
-              </Link> */}
-              <CountrySelect
-                selectedCountry={selectedCountry}
-                handleCountryChange={handleCountryChange}
-              />
+              <CountrySelect />
             </View>
           ),
           headerLeft: () => (

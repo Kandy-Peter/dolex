@@ -4,19 +4,15 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { pickerSelectStyles } from "./style";
 
 import { COLORS } from "@/constants/theme";
+import { CountryContext } from "@/contexts/countryContext";
 import { COUNTRIES } from "@/utils/countries";
 
-interface CountrySelectProps {
-  selectedCountry: string;
-  handleCountryChange: (value: string) => void;
-}
-
-const CountrySelect = ({
-  selectedCountry,
-  handleCountryChange,
-}: CountrySelectProps) => {
+const CountrySelect = () => {
   const [open, setOpen] = useState(false);
   const [countries, setCountries] = useState(COUNTRIES);
+
+  const { selectedCountry, handleCountryChange } =
+    React.useContext(CountryContext);
 
   useEffect(() => {
     const selectedCountryInfo = COUNTRIES.find(
