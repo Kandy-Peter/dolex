@@ -11,13 +11,9 @@ export default StyleSheet.create({
   headerRight: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-around",
-    paddingHorizontal: SIZES.medium,
-    paddingVertical: 3,
+    justifyContent: "flex-end",
+    paddingVertical: 5,
     marginRight: 15,
-    borderRadius: 25,
-    backgroundColor: "#fff",
-    boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
   },
 
   headerTitle: {

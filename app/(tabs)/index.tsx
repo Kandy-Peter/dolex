@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   section: {
-    backgroundColor: COLORS.white,
+    backgroundColor: "#fff",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
   },

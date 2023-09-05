@@ -1,11 +1,13 @@
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, Tabs } from "expo-router";
+import { useState } from "react";
 import { Pressable, View, Text } from "react-native";
 
 import styles from "../../src/assets/styles/tabs.style";
 
-import ScreenHeaderBtn from "@/components/common/header/ScreenHeaderBtn";
+// import ScreenHeaderBtn from "@/components/common/header/ScreenHeaderBtn";
+import CountrySelect from "@/components/dropdown/country_select";
 import { COLORS } from "@/constants/theme";
 
 function TabBarIcon(props: {
@@ -17,6 +19,13 @@ function TabBarIcon(props: {
 }
 
 export default function TabLayout() {
+  const [selectedCountry, setSelectedCountry] = useState("RW");
+
+  const handleCountryChange = (value: string) => {
+    setSelectedCountry(value);
+    // Add logic to filter data based on the selected country here
+  };
+
   return (
     <Tabs
       screenOptions={{
@@ -47,7 +56,7 @@ export default function TabLayout() {
           ),
           headerRight: () => (
             <View style={styles.headerRight}>
-              <Link href="/modal" asChild>
+              {/* <Link href="/modal" asChild>
                 <Pressable>
                   {({ pressed }) => (
                     <MaterialCommunityIcons
@@ -58,19 +67,11 @@ export default function TabLayout() {
                     />
                   )}
                 </Pressable>
-              </Link>
-              <Link href="/modal" asChild>
-                <Pressable>
-                  {({ pressed }) => (
-                    <MaterialCommunityIcons
-                      name="help-rhombus"
-                      size={24}
-                      color={COLORS.darkGray}
-                      style={{ opacity: pressed ? 0.5 : 1 }}
-                    />
-                  )}
-                </Pressable>
-              </Link>
+              </Link> */}
+              <CountrySelect
+                selectedCountry={selectedCountry}
+                handleCountryChange={handleCountryChange}
+              />
             </View>
           ),
           headerLeft: () => (

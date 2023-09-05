@@ -1,3 +1,4 @@
+import { FontAwesome5 } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
 import {
@@ -14,10 +15,17 @@ import CheapestJobCards from "@/components/common/Cards/CheapestCard";
 import { COLORS, SIZES, FONT } from "@/constants/theme";
 
 const cardColors = [
-  COLORS.blueOpacity,
-  COLORS.redOpacity,
   COLORS.orangeOpacity,
+  COLORS.redOpacity,
   COLORS.greenOpacity,
+  COLORS.blueOpacity,
+];
+
+const Icons = [
+  require("@/assets/images/trading.png"),
+  require("@/assets/images/candlestick.png"),
+  require("@/assets/images/change.png"),
+  require("@/assets/images/cryptocurrency.png"),
 ];
 
 const data = [
@@ -53,22 +61,21 @@ const CheapestRate = () => {
       <View style={styles.cardsContainer}>
         <FlatList
           data={data}
-          numColumns={2}
           renderItem={({ item, index }: any) => (
             <CheapestJobCards
               item={item}
               backgroundColor={cardColors[index % cardColors.length]}
+              IconUrl={Icons[index % Icons.length]}
             />
           )}
           keyExtractor={(item: any) => item.market_id || item}
           contentContainerStyle={{
             paddingHorizontal: SIZES.medium,
             paddingTop: SIZES.small,
+            columnGap: SIZES.medium,
           }}
-          columnWrapperStyle={{
-            justifyContent: "space-between",
-            marginBottom: 8,
-          }}
+          horizontal
+          showsHorizontalScrollIndicator={false}
         />
       </View>
     </View>

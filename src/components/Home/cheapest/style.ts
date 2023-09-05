@@ -14,7 +14,7 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   headerTitle: {
-    fontSize: 16,
+    fontSize: 20,
     fontFamily: FONT.bold,
     color: COLORS.darkGray,
   },

@@ -78,7 +78,7 @@ export default StyleSheet.create({
     color: COLORS.primary,
   },
   tradeTypeBtnText: {
-    fontFamily: FONT.regular,
+    fontFamily: FONT.bold,
     color: COLORS.white,
   },
   tradeTypeBtnTextActive: {

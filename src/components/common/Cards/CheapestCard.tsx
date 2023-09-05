@@ -1,11 +1,13 @@
-import { View, Text, Pressable } from "react-native";
-import { Entypo } from '@expo/vector-icons';
+import { Entypo } from "@expo/vector-icons";
+import { View, Text, Pressable, Image } from "react-native";
 
 import styles from "./style";
+
 import { COLORS } from "@/constants/theme";
 
 interface ICards {
   backgroundColor: string;
+  IconUrl: any;
   item: {
     name: string;
     sell_price: string;
@@ -13,12 +15,13 @@ interface ICards {
   };
 }
 
-const CheapestJobCards = ({ item, backgroundColor }: ICards) => {
+const CheapestJobCards = ({ item, backgroundColor, IconUrl }: ICards) => {
   return (
     <Pressable
       style={{ ...styles.container, backgroundColor }}
       onPress={() => {}}
     >
+      <Image style={styles.cardImage} source={IconUrl} />
       <View style={styles.cardContainer}>
         <Text style={styles.cardTitle}>{item.name}</Text>
         <Text style={styles.cardSubtitle}>{item.sell_price}</Text>
