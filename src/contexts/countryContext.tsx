@@ -6,7 +6,7 @@ const CountryContext = createContext({
 });
 
 const CountryProvider = ({ children }: any) => {
-  const [selectedCountry, setSelectedCountry] = useState("DRC");
+  const [selectedCountry, setSelectedCountry] = useState("RWA");
 
   const getCountryFromLocation = async () => {
     try {

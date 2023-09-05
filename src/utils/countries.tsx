@@ -1,10 +1,11 @@
-import React from "react"
-import { Image } from "react-native"
+import React from "react";
+import { Image } from "react-native";
 
 export const COUNTRIES = [
   {
     label: "UGN",
     value: "UG",
+    name: "uganda",
     icon: () => (
       <Image
         source={{ uri: "https://www.countryflagicons.com/FLAT/64/UG.png" }}
@@ -15,6 +16,7 @@ export const COUNTRIES = [
   {
     label: "KEN",
     value: "KE",
+    name: "kenya",
     icon: () => (
       <Image
         source={{ uri: "https://www.countryflagicons.com/FLAT/64/KE.png" }}
@@ -25,6 +27,7 @@ export const COUNTRIES = [
   {
     label: "RWA",
     value: "RW",
+    name: "rwanda",
     icon: () => (
       <Image
         source={{ uri: "https://www.countryflagicons.com/FLAT/64/RW.png" }}
@@ -35,6 +38,7 @@ export const COUNTRIES = [
   {
     label: "DRC",
     value: "DRC",
+    name: "drc",
     icon: () => (
       <Image
         source={{ uri: "https://www.countryflagicons.com/FLAT/64/CD.png" }}
@@ -42,4 +46,4 @@ export const COUNTRIES = [
       />
     ),
   },
-]
+];

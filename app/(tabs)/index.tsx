@@ -1,20 +1,15 @@
-import { useState } from "react";
-import { StyleSheet, View, ScrollView, Image } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 
 import CheapestRate from "@/components/Home/cheapest";
 import RateTable from "@/components/Home/tables";
 import Welcome from "@/components/Home/welcome";
 import GradientBackground from "@/components/gradient";
-import { COLORS } from "@/constants/theme";
 
 export default function TabHomeScreen() {
   return (
     <GradientBackground>
       <View style={styles.container}>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          stickyHeaderIndices={[1]}
-        >
+        <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
           <Welcome />
           <View style={styles.section}>
             <CheapestRate />

@@ -1,8 +1,7 @@
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Link, Tabs } from "expo-router";
-import { useState } from "react";
-import { Pressable, View, Text } from "react-native";
+import { Tabs } from "expo-router";
+import { View, Text } from "react-native";
 
 import styles from "../../src/assets/styles/tabs.style";
 
@@ -19,13 +18,6 @@ function TabBarIcon(props: {
 }
 
 export default function TabLayout() {
-  const [selectedCountry, setSelectedCountry] = useState("RW");
-
-  const handleCountryChange = (value: string) => {
-    setSelectedCountry(value);
-    // Add logic to filter data based on the selected country here
-  };
-
   return (
     <Tabs
       screenOptions={{

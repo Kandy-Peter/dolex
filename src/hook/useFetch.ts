@@ -1,18 +1,24 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import HandleCountryName from "@/utils/handleCountryCode";
+
 const magoUrl = process.env.EXPO_PUBLIC_MAGO_API;
 
-const useFetch = (endpoint: string, query?: object) => {
+const useFetch = (endpoint: string, page: number | 1) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   let pages = 1;
+  const countryName = HandleCountryName();
 
   const options = {
     method: "GET",
     url: `${magoUrl}/${endpoint}`,
-    params: { ...query },
+    params: {
+      country: countryName,
+      page,
+    },
     headers: {
       Accept: "application/json",
       "content-type": "application/json",
@@ -21,13 +27,13 @@ const useFetch = (endpoint: string, query?: object) => {
 
   const fecthData = async () => {
     setIsLoading(true);
-
     try {
       const { data } = await axios.request(options);
 
-      setData(data.data);
+      setData(data.data || []);
       pages = data.pages;
       setIsLoading(false);
+      setError(false);
     } catch (error) {
       setError(true);
       setIsLoading(false);
@@ -39,7 +45,7 @@ const useFetch = (endpoint: string, query?: object) => {
 
   useEffect(() => {
     fecthData();
-  }, []);
+  }, [countryName]);
 
   const refetch = () => {
     setIsLoading(true);

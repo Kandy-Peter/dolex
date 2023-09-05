@@ -30,10 +30,13 @@ const RateCard = ({ item }: ICards) => {
     <View style={rateStyle.container}>
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <View style={rateStyle.topContainer}>
-          <Image
-            source={require("@/assets/images/avatars/money.png")}
-            style={rateStyle.image}
-          />
+          <View style={rateStyle.avatarContainer}>
+            <Image
+              source={require("@/assets/images/avatars/money.png")}
+              style={rateStyle.image}
+            />
+            <View style={rateStyle.onlineStatus} />
+          </View>
           <View>
             <Text style={rateStyle.cardTtile}>
               {item.forexBureauDetails.name}
@@ -109,33 +112,20 @@ const RateCard = ({ item }: ICards) => {
               fontSize: 14,
               color: COLORS.gray,
             }}
-          >
-            Availability
-          </Text>
-          <View style={rateStyle.status}>
-            <Text style={{ color: COLORS.green }}>Open</Text>
-          </View>
+          />
+          <Pressable style={rateStyle.buttonContainer}>
+            <Text
+              style={{
+                color: COLORS.lightWhite,
+                fontFamily: FONT.bold,
+                fontSize: 16,
+                textAlign: "center",
+              }}
+            >
+              Buy USD
+            </Text>
+          </Pressable>
         </View>
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Pressable style={rateStyle.buttonContainer}>
-          <Text
-            style={{
-              color: COLORS.lightWhite,
-              fontFamily: FONT.bold,
-              fontSize: 20,
-              textAlign: "center",
-            }}
-          >
-            Buy USD
-          </Text>
-        </Pressable>
       </View>
       <Text style={rateStyle.bottomSeparator} />
     </View>
