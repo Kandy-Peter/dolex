@@ -5,15 +5,13 @@ import { COLORS, SIZES, FONT } from "@/constants/theme";
 const rateStyle = StyleSheet.create({
   container: {
     width: "100%",
-    height: 270,
-    padding: SIZES.medium,
+    height: 200,
+    padding: SIZES.small,
     justifyContent: "space-between",
-    borderBottomColor: COLORS.secondaryGray,
-    borderBottomWidth: 2,
   },
   topContainer: {
     flexDirection: "row",
-    gap: SIZES.medium,
+    gap: SIZES.small,
     alignItems: "center",
   },
   priceContainer: {
@@ -23,8 +21,8 @@ const rateStyle = StyleSheet.create({
   },
   button: {},
   image: {
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     borderRadius: 50,
   },
   cardTtile: {
@@ -49,17 +47,18 @@ const rateStyle = StyleSheet.create({
     gap: SIZES.small,
   },
   buttonContainer: {
-    width: "100%",
-    marginVertical: SIZES.medium,
+    width: "50%",
     backgroundColor: COLORS.secondaryGreen,
+    borderRadius: 8,
     height: 50,
     justifyContent: "center",
+    alignItems: "center",
   },
   status: {
     fontFamily: FONT.bold,
     alignItems: "center",
     fontSize: SIZES.medium,
-    backgroundColor: COLORS.greenOpacity,
+    backgroundColor: "#31b7004d",
     borderRadius: 20,
     borderColor: COLORS.secondaryGreen,
     borderWidth: 1,
@@ -67,6 +66,12 @@ const rateStyle = StyleSheet.create({
     width: 70,
     textAlign: "center",
     paddingVertical: 5,
+  },
+  bottomSeparator: {
+    width: "100%",
+    height: 1,
+    backgroundColor: COLORS.gray,
+    marginTop: SIZES.medium,
   },
 });
 

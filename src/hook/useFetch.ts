@@ -7,6 +7,7 @@ const useFetch = (endpoint: string, query?: object) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
+  let pages = 1;
 
   const options = {
     method: "GET",
@@ -25,6 +26,7 @@ const useFetch = (endpoint: string, query?: object) => {
       const { data } = await axios.request(options);
 
       setData(data.data);
+      pages = data.pages;
       setIsLoading(false);
     } catch (error) {
       setError(true);
@@ -44,7 +46,7 @@ const useFetch = (endpoint: string, query?: object) => {
     fecthData();
   };
 
-  return { data, isLoading, error, refetch };
+  return { data, isLoading, error, refetch, pages };
 };
 
 export default useFetch;

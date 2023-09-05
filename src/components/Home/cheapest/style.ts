@@ -6,7 +6,6 @@ export default StyleSheet.create({
   container: {
     width: "100%",
     marginTop: SIZES.xLarge,
-    paddingHorizontal: SIZES.large,
   },
   header: {
     flexDirection: "row",
@@ -18,6 +17,13 @@ export default StyleSheet.create({
     fontFamily: FONT.bold,
     color: COLORS.darkGray,
   },
+  separator: {
+    width: "10%",
+    height: 5,
+    borderRadius: 10,
+    backgroundColor: COLORS.primary,
+    marginTop: SIZES.small,
+  },
   headerBtn: {
     fontSize: SIZES.medium,
     fontFamily: FONT.light,
@@ -25,5 +31,6 @@ export default StyleSheet.create({
   },
   cardsContainer: {
     marginTop: SIZES.medium,
+    paddingHorizontal: 2,
   },
 });

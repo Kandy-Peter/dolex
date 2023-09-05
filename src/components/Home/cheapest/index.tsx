@@ -1,18 +1,10 @@
-import { FontAwesome5 } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
 import React from "react";
-import {
-  View,
-  Text,
-  Pressable,
-  FlatList,
-  ActivityIndicator,
-} from "react-native";
+import { View, Text, FlatList } from "react-native";
 
 import styles from "./style";
 
 import CheapestJobCards from "@/components/common/Cards/CheapestCard";
-import { COLORS, SIZES, FONT } from "@/constants/theme";
+import { COLORS, SIZES } from "@/constants/theme";
 
 const cardColors = [
   COLORS.orangeOpacity,
@@ -54,8 +46,9 @@ const data = [
 const CheapestRate = () => {
   return (
     <View style={styles.container}>
-      <View>
+      <View style={{paddingHorizontal: SIZES.medium}}>
         <Text style={styles.headerTitle}>Cheapest rates</Text>
+        <Text style={styles.separator} />
       </View>
 
       <View style={styles.cardsContainer}>

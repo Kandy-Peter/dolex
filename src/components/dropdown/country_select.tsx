@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Image } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
 import { pickerSelectStyles } from "./style";
