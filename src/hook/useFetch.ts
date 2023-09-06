@@ -5,7 +5,7 @@ import HandleCountryName from "@/utils/handleCountryCode";
 
 const magoUrl = process.env.EXPO_PUBLIC_MAGO_API;
 
-const useFetch = (endpoint: string, page: number | 1) => {
+const useFetch = (endpoint: string, page?: number | 1) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);

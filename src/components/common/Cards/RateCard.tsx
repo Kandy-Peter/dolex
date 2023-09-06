@@ -1,4 +1,5 @@
-import { Entypo, AntDesign } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { View, Text, Pressable, Image } from "react-native";
 
 import rateStyle from "./rate.styles";
@@ -8,7 +9,7 @@ import formatNumber from "@/utils/formatNumber";
 
 interface ICards {
   item: {
-    id: string;
+    _id: string;
     buy_rate: string;
     sell_rate: string;
     available_amount: number;
@@ -26,6 +27,7 @@ interface ICards {
 }
 
 const RateCard = ({ item }: ICards) => {
+  const router = useRouter();
   return (
     <View style={rateStyle.container}>
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
@@ -113,7 +115,10 @@ const RateCard = ({ item }: ICards) => {
               color: COLORS.gray,
             }}
           />
-          <Pressable style={rateStyle.buttonContainer}>
+          <Pressable
+            style={rateStyle.buttonContainer}
+            onPress={() => router.push(`/rate_details/${item._id}`)}
+          >
             <Text
               style={{
                 color: COLORS.lightWhite,
