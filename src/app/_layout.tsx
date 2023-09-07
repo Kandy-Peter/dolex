@@ -5,6 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { View } from "react-native";
 
+import { AuthProvider } from "@/contexts/auth";
 import { CountryProvider } from "@/contexts/countryContext";
 
 export {
@@ -22,11 +23,11 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    DMlightLato: require("./../src/assets/fonts/Lato-Light.ttf"),
-    DMregularLato: require("./../src/assets/fonts/Lato-Regular.ttf"),
-    DMboldLato: require("./../src/assets/fonts/Lato-Bold.ttf"),
-    DMblackLato: require("./../src/assets/fonts/Lato-Black.ttf"),
-    DMAudiowide: require("./../src/assets/fonts/Audiowide-Regular.ttf"),
+    DMlightLato: require("@/assets/fonts/Lato-Light.ttf"),
+    DMregularLato: require("@/assets/fonts/Lato-Regular.ttf"),
+    DMboldLato: require("@/assets/fonts/Lato-Bold.ttf"),
+    DMblackLato: require("@/assets/fonts/Lato-Black.ttf"),
+    DMAudiowide: require("@/assets/fonts/Audiowide-Regular.ttf"),
     ...FontAwesome.font,
   });
 
@@ -60,11 +61,13 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   return (
-    <CountryProvider>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-      </Stack>
-    </CountryProvider>
+    <AuthProvider>
+      <CountryProvider>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+        </Stack>
+      </CountryProvider>
+    </AuthProvider>
   );
 }

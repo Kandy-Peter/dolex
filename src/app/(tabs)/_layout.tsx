@@ -3,10 +3,9 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Tabs } from "expo-router";
 import { View, Text } from "react-native";
 
-import styles from "../../src/assets/styles/tabs.style";
+import styles from "@/assets/styles/tabs.style";
 
-// import ScreenHeaderBtn from "@/components/common/header/ScreenHeaderBtn";
-import CountrySelect from "@/components/dropdown/country_select";
+import CountrySelect from "@/components/common/Fieds/dropdown/country_select";
 import { COLORS } from "@/constants/theme";
 
 function TabBarIcon(props: {
