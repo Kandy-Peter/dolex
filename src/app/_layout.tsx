@@ -63,9 +63,14 @@ function RootLayoutNav() {
   return (
     <SessionProvider>
       <CountryProvider>
-        {/* <Slot /> */}
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            headerTitle: "",
+            headerShadowVisible: false,
+          }}
+        >
+          <Stack.Screen name="(app)" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: "modal" }} />
         </Stack>
       </CountryProvider>

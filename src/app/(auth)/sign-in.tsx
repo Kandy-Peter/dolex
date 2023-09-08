@@ -11,7 +11,10 @@ import { COLORS } from "@/constants/theme";
 import { useSession } from "@/contexts/auth";
 
 export default function SignIn() {
-  const { session, isLoading, signIn } = useSession() ?? {};
+  const { session, isLoading, signIn } = useSession() ?? {
+    session: null,
+    isLoading: false,
+  };
 
   const [inputs, setInputs] = useState({
     email: "",
@@ -45,10 +48,7 @@ export default function SignIn() {
   };
 
   return (
-    <View
-      style={style.container}
-      //remove the 
-    >
+    <View style={style.container}>
       <Loader isLoading={isLoading} />
       <View style={style.formContainer}>
         <Text style={style.title}>Welcome back!</Text>

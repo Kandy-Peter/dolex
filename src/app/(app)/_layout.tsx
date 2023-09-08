@@ -5,9 +5,9 @@ import { View, Text } from "react-native";
 
 import styles from "@/assets/styles/tabs.style";
 import CountrySelect from "@/components/common/Fieds/dropdown/country_select";
+import Loader from "@/components/common/Loader";
 import { COLORS } from "@/constants/theme";
 import { useSession } from "@/contexts/auth";
-import Loader from "@/components/common/Loader";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
@@ -18,7 +18,10 @@ function TabBarIcon(props: {
 }
 
 export default function AppLayout() {
-  const { session, isLoading } = useSession() ?? {};
+  const { session, isLoading } = useSession() ?? {
+    session: null,
+    isLoading: false,
+  };
 
   if (isLoading) {
     return <Loader isLoading={isLoading} />;
