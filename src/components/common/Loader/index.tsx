@@ -9,7 +9,7 @@ import {
 import { COLORS } from "@/constants/theme";
 
 interface ILoader {
-  isLoading: boolean;
+  isLoading: boolean | undefined;
 }
 
 const Loader = ({ isLoading = false }: ILoader) => {

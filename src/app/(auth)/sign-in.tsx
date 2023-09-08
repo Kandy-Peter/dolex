@@ -8,17 +8,16 @@ import AuthBtn from "@/components/common/Buttons/authBtn";
 import Input from "@/components/common/Fieds/input";
 import Loader from "@/components/common/Loader";
 import { COLORS } from "@/constants/theme";
-import { useAuth } from "@/contexts/auth";
+import { useSession } from "@/contexts/auth";
 
 export default function SignIn() {
-  const { signIn } = useAuth();
+  const { session, isLoading, signIn } = useSession() ?? {};
 
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
   const [errors, setErrors] = useState<any | null>({});
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleErrors = (name: string, value: string) => {
     setErrors((prev: any) => ({ ...prev, [name]: value }));
@@ -46,7 +45,10 @@ export default function SignIn() {
   };
 
   return (
-    <View style={style.container}>
+    <View
+      style={style.container}
+      //remove the 
+    >
       <Loader isLoading={isLoading} />
       <View style={style.formContainer}>
         <Text style={style.title}>Welcome back!</Text>
@@ -79,9 +81,9 @@ export default function SignIn() {
           </View>
           <View style={style.singUplink}>
             <Text style={{}}>Forgot password?</Text>
-            {/* <Link replace style={style.forgotPasswordText} href="/auth/sign-up">
+            <Link replace style={style.forgotPasswordText} href="/sign-up">
               SingUp
-            </Link> */}
+            </Link>
           </View>
         </View>
       </View>

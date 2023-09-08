@@ -1,11 +1,11 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
-import { SplashScreen, Stack } from "expo-router";
+import { SplashScreen, Stack, Slot } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { View } from "react-native";
 
-import { AuthProvider } from "@/contexts/auth";
+import { SessionProvider } from "@/contexts/auth";
 import { CountryProvider } from "@/contexts/countryContext";
 
 export {
@@ -61,13 +61,14 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   return (
-    <AuthProvider>
+    <SessionProvider>
       <CountryProvider>
+        {/* <Slot /> */}
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: "modal" }} />
         </Stack>
       </CountryProvider>
-    </AuthProvider>
+    </SessionProvider>
   );
 }

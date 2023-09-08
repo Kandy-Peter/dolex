@@ -1,39 +1,40 @@
-import { router, useSegments } from "expo-router";
-import { createContext, useContext, useEffect, useState } from "react";
+import React from "react";
 
-import { AuthContextValue } from "@/types/user";
+import { ISessionProps, AuthContextValue } from "@/@types/user";
+import { useStorageState } from "@/store/userStorageState";
 
-export const AuthContext = createContext({}) as any;
+const AuthContext = React.createContext<AuthContextValue | null>(null);
 
-export function useAuth(): AuthContextValue {
-  return useContext(AuthContext);
-}
-
-function useProtectedRoutes(user: any) {
-  const segments = useSegments();
-
-  useEffect(() => {
-    const isAuthGroup = segments[0] === "auth";
-
-    if (isAuthGroup && user) {
-      router.replace("/");
-    } else {
-      router.replace("/sign-in");
+// This hook can be used to access the user info.
+export function useSession() {
+  const value = React.useContext(AuthContext);
+  if (process.env.NODE_ENV !== "production") {
+    if (!value) {
+      throw new Error("useSession must be wrapped in a <SessionProvider />");
     }
-  }, [segments]);
-  return null;
+  }
+
+  return value;
 }
 
-export function AuthProvider({ children }: any) {
-  const [user, setAuth] = useState<null | any>(null);
+export function SessionProvider(props: ISessionProps) {
+  const [[isLoading, session], setSession] = useStorageState("session");
 
-  useProtectedRoutes(user);
-
-  const value = {
-    signIn: () => setAuth({}),
-    signOut: () => setAuth(null),
-    user,
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{
+        signIn: () => {
+          // Perform sign-in logic here
+          setSession("xxx");
+        },
+        signOut: () => {
+          setSession(null);
+        },
+        session,
+        isLoading,
+      }}
+    >
+      {props.children}
+    </AuthContext.Provider>
+  );
 }
