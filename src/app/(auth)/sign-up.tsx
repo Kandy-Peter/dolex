@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button, Text, View } from "react-native";
 import * as Progress from "react-native-progress";
 
@@ -6,35 +5,12 @@ import AccountType from "@/components/screens/AccountType";
 import Credentials from "@/components/screens/Credentials";
 import ForexDetails from "@/components/screens/ForexDetails";
 import VerifyForm from "@/components/screens/VerifyForm";
+import PersonalAccount from "@/components/screens/personalAccount";
 import { COLORS } from "@/constants/theme";
 import { ScreenStore } from "@/stores/screenStore";
 
 const SignIn = () => {
   const information = ScreenStore.useState();
-
-  const [visible, setVisible] = useState(false);
-
-  // show dialogue on confirmation
-  const showDialog = () => setVisible(true);
-  const hideDialog = () => setVisible(false);
-
-  const clearAndReset = () => {
-    ScreenStore.replace({
-      user_type: "",
-      email: "",
-      full_name: "",
-      password: "",
-      password_confirmation: "",
-      phone_number: "",
-      forex_bureau_name: "",
-      forex_bureau_address: "",
-      country: "",
-      termsAccepted: "",
-      privacyAccepted: "",
-      progress: 0,
-    });
-    setVisible(false);
-  };
 
   const handleNext = () => {
     // TODO Add validation logic here if needed
@@ -53,30 +29,34 @@ const SignIn = () => {
     }
   };
 
-  let currentStep = null;
-  switch (information.progress) {
-    case 0:
-      currentStep = <AccountType />;
-      break;
-    case 1:
-      currentStep = <Credentials />;
-      break;
-    case 2:
-      currentStep = <ForexDetails />;
-      break;
-    case 3:
-      currentStep = <VerifyForm />;
-      break;
-    default:
-      currentStep = <Text>Invalid Step</Text>;
-  }
+  const renderStepComponents = () => {
+    if (information.progress === 0) {
+      return <AccountType />;
+    } else if (information.user_type === "normal_user") {
+      if (information.progress === 1) {
+        return <PersonalAccount />;
+      } else if (information.progress === 2) {
+        return <VerifyForm />;
+      }
+    } else if (information.user_type === "forex_bureau") {
+      if (information.progress === 1) {
+        return <Credentials />;
+      } else if (information.progress === 2) {
+        return <ForexDetails />;
+      } else if (information.progress === 3) {
+        return <VerifyForm />;
+      }
+    }
+
+    return <Text>Invalid Step</Text>;
+  };
 
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text> Sign In </Text>
-      {currentStep}
+      {renderStepComponents()}
       <Progress.Bar
-        progress={information.progress / 3} // Assuming 3 steps
+        progress={information.progress / 3}
         width={200}
         height={20}
         color={COLORS.primary}
