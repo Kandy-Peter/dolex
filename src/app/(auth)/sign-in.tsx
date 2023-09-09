@@ -1,6 +1,6 @@
 import { Link } from "expo-router";
 import { useState } from "react";
-import { Text, View, Keyboard, Alert } from "react-native";
+import { Text, View, Keyboard, Image } from "react-native";
 
 import style from "./signin.style";
 
@@ -51,13 +51,10 @@ export default function SignIn() {
     <View style={style.container}>
       <Loader isLoading={isLoading} />
       <View style={style.formContainer}>
-        <Text style={style.title}>Welcome back!</Text>
         <Text style={style.subTitle}>Sign in to continue</Text>
-
         <View style={style.inputContainer}>
           <Input
             placeHolder="Your email"
-            iconName="mail"
             error={errors.email}
             value={inputs.email}
             onChangeText={(text: string) => handleOnChange("email", text)}
@@ -65,7 +62,6 @@ export default function SignIn() {
           />
           <Input
             placeHolder="Your password"
-            iconName="lock"
             error={errors.password}
             value={inputs.password}
             password

@@ -8,7 +8,6 @@ import { COLORS } from "@/constants/theme";
 
 interface IInput {
   placeHolder: string;
-  iconName: string;
   error: string;
   value: string;
   password?: boolean;
@@ -18,7 +17,6 @@ interface IInput {
 
 const Input = ({
   placeHolder,
-  iconName,
   value,
   error,
   password,
@@ -43,9 +41,9 @@ const Input = ({
       >
         <TextInput
           autoCorrect={false}
-          style={{ flex: 1, color: COLORS.darkWhite }}
+          style={{ flex: 1, color: COLORS.darkGray }}
           placeholder={placeHolder}
-          placeholderTextColor={COLORS.darkWhite}
+          placeholderTextColor={COLORS.gray}
           value={value}
           onFocus={(ev: any) => {
             setIsFocused(true);
@@ -59,7 +57,7 @@ const Input = ({
           <Entypo
             name={hidePassword ? "eye-with-line" : "eye"}
             size={24}
-            color={COLORS.darkWhite}
+            color={COLORS.darkGray}
             onPress={() => setHidePassword(!hidePassword)}
           />
         )}

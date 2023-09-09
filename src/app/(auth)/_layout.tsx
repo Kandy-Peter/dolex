@@ -2,7 +2,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import React, { useEffect } from "react";
-import { View, StatusBar } from "react-native";
+import { View } from "react-native";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -38,7 +38,6 @@ export default function RootLayout() {
         flex: 1,
       }}
     >
-      <StatusBar style="light" />
       <RootLayoutNav />
     </View>
   );
@@ -47,7 +46,11 @@ export default function RootLayout() {
 function RootLayoutNav() {
   return (
     <Stack>
-      <Stack.Screen name="sign-in" options={{ headerShown: false }} />
+      <Stack.Screen name="onboarding" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="sign-in"
+        options={{ presentation: "modal", headerShown: false }}
+      />
       <Stack.Screen
         name="sign-up"
         options={{ headerShown: false, headerTitle: "" }}

@@ -15,14 +15,14 @@ export default StyleSheet.create({
     paddingHorizontal: SIZES.medium,
   },
   title: {
-    fontSize: 50,
+    fontSize: 30,
     fontFamily: FONT.bold,
     color: COLORS.primary,
     marginBottom: SIZES.small,
   },
   subTitle: {
-    fontSize: 20,
-    fontFamily: FONT.regular,
+    fontSize: 22,
+    fontFamily: FONT.bold,
     color: COLORS.primary,
     marginBottom: SIZES.large,
   },
@@ -32,7 +32,7 @@ export default StyleSheet.create({
   },
   forgotPasswordContainer: {},
   forgotPasswordText: {
-    fontSize: 14,
+    fontSize: 15,
     fontFamily: FONT.regular,
     color: COLORS.primary,
     textDecorationLine: "underline",

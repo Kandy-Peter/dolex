@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacity, Text } from "react-native";
 
-import { COLORS } from "@/constants/theme";
+import { COLORS, FONT } from "@/constants/theme";
 
 interface IAuthBtn {
   title: string;
@@ -14,7 +14,7 @@ const AuthBtn = ({ title, onPress, disabled }: IAuthBtn) => {
     <TouchableOpacity
       style={{
         backgroundColor: disabled ? COLORS.darkWhite : COLORS.primary,
-        paddingVertical: 15,
+        paddingVertical: 10,
         width: "100%",
         borderRadius: 5,
         alignItems: "center",
@@ -25,7 +25,16 @@ const AuthBtn = ({ title, onPress, disabled }: IAuthBtn) => {
       onPress={onPress}
       disabled={disabled}
     >
-      <Text style={{ color: COLORS.white, fontWeight: "bold" }}>{title}</Text>
+      <Text
+        style={{
+          color: COLORS.white,
+          fontWeight: "bold",
+          fontSize: 18,
+          fontFamily: FONT.bold,
+        }}
+      >
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };
