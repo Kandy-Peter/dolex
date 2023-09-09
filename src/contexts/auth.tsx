@@ -1,7 +1,7 @@
 import React from "react";
 
 import { ISessionProps, AuthContextValue } from "@/@types/user";
-import { useStorageState } from "@/store/userStorageState";
+import { useStorageState } from "@/stores/userStorageState";
 
 const AuthContext = React.createContext<AuthContextValue | null>(null);
 
