@@ -1,3 +1,4 @@
+import { COLORS } from "@/constants/theme";
 import { FontAwesome } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
@@ -53,7 +54,21 @@ function RootLayoutNav() {
       />
       <Stack.Screen
         name="sign-up"
-        options={{ headerShown: false, headerTitle: "" }}
+        options={{
+          headerTitle: "mago",
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            fontFamily: "DMAudiowide",
+            fontSize: 28,
+            color: COLORS.primary,
+          },
+          headerBackTitle: "Back",
+          headerBackTitleVisible: true,
+          headerStyle: {
+            backgroundColor: "transparent",
+          },
+          headerTintColor: COLORS.darkGray,
+        }}
       />
     </Stack>
   );

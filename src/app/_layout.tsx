@@ -1,9 +1,9 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
-import { SplashScreen, Stack, Slot } from "expo-router";
+import { SplashScreen, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
-import { View } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
 import { SessionProvider } from "@/contexts/auth";
 import { CountryProvider } from "@/contexts/countryContext";
@@ -39,6 +39,7 @@ export default function RootLayout() {
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
+      // defaultFont();
     }
   }, [loaded]);
 
@@ -50,7 +51,6 @@ export default function RootLayout() {
     <View
       style={{
         flex: 1,
-        // backgroundColor: "#D62645",
       }}
     >
       <StatusBar style="light" />

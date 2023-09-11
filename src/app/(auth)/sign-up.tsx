@@ -1,12 +1,11 @@
+import RenderStepIndicator from "components/common/setpIndicator";
+import AccountType from "components/screens/AccountType";
+import Credentials from "components/screens/Credentials";
+import ForexDetails from "components/screens/ForexDetails";
+import VerifyForm from "components/screens/VerifyForm";
+import PersonalAccount from "components/screens/personalAccount";
 import { Button, Text, View } from "react-native";
-import * as Progress from "react-native-progress";
 
-import AccountType from "@/components/screens/AccountType";
-import Credentials from "@/components/screens/Credentials";
-import ForexDetails from "@/components/screens/ForexDetails";
-import VerifyForm from "@/components/screens/VerifyForm";
-import PersonalAccount from "@/components/screens/personalAccount";
-import { COLORS } from "@/constants/theme";
 import { ScreenStore } from "@/stores/screenStore";
 
 const SignIn = () => {
@@ -26,6 +25,14 @@ const SignIn = () => {
       ScreenStore.update((s) => {
         s.progress -= 1;
       });
+    }
+  };
+
+  const lastStep = () => {
+    if (information.user_type === "normal_user") {
+      return information.progress === 2;
+    } else if (information.user_type === "forex_bureau") {
+      return information.progress === 3;
     }
   };
 
@@ -52,17 +59,25 @@ const SignIn = () => {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text> Sign In </Text>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        paddingVertical: 20,
+      }}
+    >
+      {information.progress > 0 &&
+        RenderStepIndicator({
+          progress: information.progress,
+          user_type: information.user_type,
+        })}
       {renderStepComponents()}
-      <Progress.Bar
-        progress={information.progress / 3}
-        width={200}
-        height={20}
-        color={COLORS.primary}
-      />
       <Button title="Previous" onPress={handlePrevious} />
-      <Button title="Next" onPress={handleNext} />
+      <Button
+        title={lastStep() ? "Finish" : "Next"}
+        onPress={lastStep() ? () => {} : handleNext}
+      />
     </View>
   );
 };
