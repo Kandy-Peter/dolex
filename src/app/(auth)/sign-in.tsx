@@ -1,14 +1,14 @@
 import { Link } from "expo-router";
 import { useState } from "react";
-import { Text, View, Keyboard, Image } from "react-native";
+import { Text, View, Keyboard } from "react-native";
 
 import style from "./signin.style";
 
 import AuthBtn from "@/components/common/Buttons/authBtn";
-import Input from "@/components/common/Fieds/input";
+import Input from "@/components/common/Fieds/Inputs/input";
 import Loader from "@/components/common/Loader";
-import { COLORS } from "@/constants/theme";
 import { useSession } from "@/contexts/auth";
+import { clearInformation } from "@/stores/screenStore";
 
 export default function SignIn() {
   const { session, isLoading, signIn } = useSession() ?? {
@@ -70,14 +70,18 @@ export default function SignIn() {
           />
           <View style={style.forgotPasswordContainer}>
             <Text style={style.forgotPasswordText}>Forgot password?</Text>
-            {/* <Text style={style.textUnderline} /> */}
           </View>
           <View style={style.buttonContainer}>
             <AuthBtn title="Sign in" onPress={() => {}} />
           </View>
           <View style={style.singUplink}>
             <Text style={{}}>Forgot password?</Text>
-            <Link replace style={style.forgotPasswordText} href="/sign-up">
+            <Link
+              replace
+              style={style.forgotPasswordText}
+              href="/sign-up"
+              onPress={() => clearInformation()}
+            >
               SingUp
             </Link>
           </View>

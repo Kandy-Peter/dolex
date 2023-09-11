@@ -1,12 +1,17 @@
 import { Link } from "expo-router";
 import { useState } from "react";
-import { Text, View, Keyboard, StyleSheet } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
+
+import CheckBox from "../common/Fieds/checkBox";
+import VerifyEmailModal from "../common/modal/formModal";
 
 import AuthBtn from "@/components/common/Buttons/authBtn";
-import Input from "@/components/common/Fieds/input";
+import Input from "@/components/common/Fieds/Inputs/input";
 import Loader from "@/components/common/Loader";
 import { COLORS, FONT, SIZES } from "@/constants/theme";
 import { useSession } from "@/contexts/auth";
+import schemaValidations from "@/helpers/inputValidation";
+import { ScreenStore } from "@/stores/screenStore";
 
 const PersonalAccount = () => {
   const { session, isLoading, signIn } = useSession() ?? {
@@ -14,104 +19,169 @@ const PersonalAccount = () => {
     isLoading: false,
   };
 
-  const [inputs, setInputs] = useState({
+  const inputsData = {
+    full_name: "",
     email: "",
     password: "",
-  });
-  const [errors, setErrors] = useState<any | null>({});
+    password_confirmation: "",
+    termsAccepted: false,
+  };
+
+  const [inputs, setInputs] = useState(inputsData);
+  const [errors, setErrors] = useState<any | null>(inputsData);
+  const [isVerifyEmailModalVisible, setIsVerifyEmailModalVisible] =
+    useState(false);
 
   const handleErrors = (name: string, value: string) => {
     setErrors((prev: any) => ({ ...prev, [name]: value }));
   };
 
-  const validate = async () => {
-    Keyboard.dismiss();
-    let isValid = true;
-
-    if (!inputs.email) {
-      isValid = false;
-      handleErrors("email", "Email is required");
+  const validateInputs = async () => {
+    try {
+      await schemaValidations.validate(inputs, { abortEarly: false });
+      setErrors({
+        full_name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
+        termsAccepted: "",
+      });
+      return true;
+    } catch (validationErrors: any) {
+      const newErrors = {} as any;
+      validationErrors.inner.forEach((error: any) => {
+        newErrors[error.path] = error.message;
+      });
+      // Set the validation errors
+      setErrors(newErrors);
+      return false;
     }
+  };
 
-    if (!inputs.password) {
-      isValid = false;
-      handleErrors("password", "Password is required");
-    }
-
-    return isValid;
+  const saveCredentials = () => {
+    ScreenStore.update((s) => {
+      s.full_name = inputs.full_name;
+      s.email = inputs.email;
+      s.password = inputs.password;
+      s.password_confirmation = inputs.password_confirmation;
+      s.termsAccepted = inputs.termsAccepted;
+      // s.progress += 1;
+    });
   };
 
   const handleOnChange = (name: string, value: string) => {
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleCheckBox = (value: boolean) => {
+    setInputs((prev) => ({ ...prev, termsAccepted: value }));
+  };
+
+  const handleSubmit = async () => {
+    const isValid = await validateInputs();
+    if (isValid) {
+      saveCredentials();
+      setIsVerifyEmailModalVisible(true);
+    }
+  };
+
+  const termsAndConditonLabel = (
+    <Text style={style.label}>
+      I agree to the Mago Terms and Conditions.{" "}
+      <Link href="https://google.com" style={style.link}>
+        <Text style={style.link}>Learn more</Text>
+      </Link>
+    </Text>
+  );
+
   return (
     <View style={style.container}>
       <Loader isLoading={isLoading} />
-      <View style={style.formContainer}>
-        <Text style={style.subTitle}>Sign in to continue</Text>
-        <View style={style.inputContainer}>
-          <Input
-            placeHolder="Your email"
-            error={errors.email}
-            value={inputs.email}
-            onChangeText={(text: string) => handleOnChange("email", text)}
-            onFocus={() => handleErrors("email", "")}
-          />
-          <Input
-            placeHolder="Your password"
-            error={errors.password}
-            value={inputs.password}
-            password
-            onChangeText={(text: string) => handleOnChange("password", text)}
-            onFocus={() => handleErrors("password", "")}
-          />
-          <View style={style.forgotPasswordContainer}>
-            <Text style={style.forgotPasswordText}>Forgot password?</Text>
-            {/* <Text style={style.textUnderline} /> */}
-          </View>
-          <View style={style.buttonContainer}>
-            <AuthBtn title="Sign in" onPress={() => {}} />
-          </View>
-          <View style={style.singUplink}>
-            <Text style={{}}>Forgot password?</Text>
-            <Link replace style={style.forgotPasswordText} href="/signin">
-              Singin
-            </Link>
+      {isVerifyEmailModalVisible ? (
+        <VerifyEmailModal />
+      ) : (
+        <View style={style.formContainer}>
+          <Text style={style.subTitle}>Enter your credentials</Text>
+          <View style={style.inputContainer}>
+            <Input
+              placeHolder="Full name"
+              error={errors.full_name}
+              value={inputs.full_name}
+              onChangeText={(text: string) => handleOnChange("full_name", text)}
+              onFocus={() => handleErrors("full_name", "")}
+            />
+            <Input
+              placeHolder="Email"
+              error={errors.email}
+              value={inputs.email}
+              onChangeText={(text: string) => handleOnChange("email", text)}
+              onFocus={() => handleErrors("email", "")}
+            />
+            <Input
+              placeHolder="Password"
+              error={errors.password}
+              value={inputs.password}
+              password
+              onChangeText={(text: string) => handleOnChange("password", text)}
+              onFocus={() => handleErrors("password", "")}
+            />
+            <Input
+              placeHolder="Confrim password"
+              error={errors.password_confirmation}
+              value={inputs.password_confirmation}
+              password
+              onChangeText={(text: string) =>
+                handleOnChange("password_confirmation", text)
+              }
+              onFocus={() => handleErrors("password_confirmation", "")}
+            />
+            <CheckBox
+              label={termsAndConditonLabel}
+              value={inputs.termsAccepted}
+              onChange={(value: boolean) => handleCheckBox(value)}
+              error={errors.termsAccepted}
+            />
+            <View style={style.buttonContainer}>
+              <AuthBtn
+                title="Create Account"
+                onPress={handleSubmit}
+                // disabled={isDisabled}
+              />
+            </View>
           </View>
         </View>
-      </View>
+      )}
     </View>
   );
-}
+};
 
 const style = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
-    backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    marginTop: SIZES.xLarge,
   },
   formContainer: {
     width: "100%",
     paddingHorizontal: SIZES.medium,
+    alignItems: "center",
   },
   title: {
     fontSize: 30,
     fontFamily: FONT.bold,
-    color: COLORS.primary,
+    color: COLORS.darkGray,
     marginBottom: SIZES.small,
   },
   subTitle: {
     fontSize: 22,
     fontFamily: FONT.bold,
-    color: COLORS.primary,
+    color: COLORS.darkGray,
     marginBottom: SIZES.large,
   },
   inputContainer: {
     width: "100%",
-    marginBottom: SIZES.small,
+    marginBottom: SIZES.medium,
   },
   forgotPasswordContainer: {},
   forgotPasswordText: {
@@ -129,6 +199,17 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: SIZES.large,
+  },
+  label: {
+    fontSize: 14,
+    fontFamily: FONT.regular,
+    color: COLORS.darkGray,
+  },
+  link: {
+    fontSize: 14,
+    fontFamily: FONT.regular,
+    color: COLORS.primary,
+    textDecorationLine: "underline",
   },
 });
 

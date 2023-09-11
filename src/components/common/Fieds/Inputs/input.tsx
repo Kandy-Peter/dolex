@@ -1,6 +1,6 @@
 import { Entypo } from "@expo/vector-icons";
 import React from "react";
-import { TextInput, View } from "react-native";
+import { TextInput, View, Text } from "react-native";
 
 import styles from "./style";
 
@@ -11,7 +11,7 @@ interface IInput {
   error: string;
   value: string;
   password?: boolean;
-  onFocus: (ev: Event) => void;
+  onFocus?: (ev: any) => void;
   onChangeText: (text: string) => void;
 }
 
@@ -25,6 +25,11 @@ const Input = ({
 }: IInput) => {
   const [hidePassword, setHidePassword] = React.useState(password);
   const [isFocused, setIsFocused] = React.useState(false);
+
+  const handleFocus = (ev: any) => {
+    setIsFocused(true);
+    onFocus(ev);
+  };
   return (
     <View style={{}}>
       <View
@@ -45,10 +50,8 @@ const Input = ({
           placeholder={placeHolder}
           placeholderTextColor={COLORS.gray}
           value={value}
-          onFocus={(ev: any) => {
-            setIsFocused(true);
-            onFocus(ev);
-          }}
+          onFocus={handleFocus}
+          key={placeHolder}
           onBlur={() => setIsFocused(false)}
           secureTextEntry={hidePassword}
           {...props}
@@ -62,6 +65,7 @@ const Input = ({
           />
         )}
       </View>
+      <Text style={{ color: "red", fontSize: 12 }}>{error}</Text>
     </View>
   );
 };

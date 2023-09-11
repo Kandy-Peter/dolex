@@ -13,7 +13,7 @@ const AuthBtn = ({ title, onPress, disabled }: IAuthBtn) => {
   return (
     <TouchableOpacity
       style={{
-        backgroundColor: disabled ? COLORS.darkWhite : COLORS.primary,
+        backgroundColor: disabled ? COLORS.primaryOpaque : COLORS.primary,
         paddingVertical: 10,
         width: "100%",
         borderRadius: 5,

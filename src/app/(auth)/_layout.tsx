@@ -1,9 +1,10 @@
-import { COLORS } from "@/constants/theme";
 import { FontAwesome } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import React, { useEffect } from "react";
 import { View } from "react-native";
+
+import { COLORS } from "@/constants/theme";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
