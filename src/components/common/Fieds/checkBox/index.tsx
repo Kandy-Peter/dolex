@@ -1,5 +1,5 @@
 import Checkbox from "expo-checkbox";
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { COLORS } from "@/constants/theme";

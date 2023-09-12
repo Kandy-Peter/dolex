@@ -1,58 +1,51 @@
-import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text } from "react-native";
+import * as yup from "yup";
 
 import style from "./style";
 import AuthBtn from "../Buttons/authBtn";
 import Input from "../Fieds/Inputs/input";
 
-import { COLORS, FONT, SIZES } from "@/constants/theme";
-import schemaValidations from "@/helpers/inputValidation";
 import { ScreenStore } from "@/stores/screenStore";
 
-const VerifyEmailModal = () => {
-  const { email } = ScreenStore.useState();
-  const [errorMessage, setErrorMessage] = React.useState("");
-  const [isEmailValid, setIsEmailValid] = React.useState(false);
+interface Props {
+  onEmailConfirmed: () => void;
+  email: string;
+}
 
-  const validateInputs = async () => {
-    try {
-      await schemaValidations.validate({ email }, { abortEarly: false });
-      setErrorMessage("");
-      setIsEmailValid(true);
-      return true;
-    } catch (validationErrors: any) {
-      const newErrors = {} as any;
-      validationErrors.inner.forEach((error: any) => {
-        newErrors[error.path] = error.message;
+const VerifyEmailModal = ({ email, onEmailConfirmed }: Props) => {
+  const [errorMessage, setErrorMessage] = React.useState("");
+
+  const validateEmail = (value: string) => {
+    const emailRegex = /\S+@\S+\.\S+/;
+    const schema = yup.object().shape({
+      email: yup.string().email().required().matches(emailRegex),
+    });
+    schema
+      .validate({ email: value })
+      .then(() => {
+        setErrorMessage("");
+      })
+      .catch((err) => {
+        setErrorMessage(err.errors[0]);
       });
-      setErrorMessage(newErrors.email);
-      setIsEmailValid(false);
-      return false;
-    }
   };
 
-  let newEmail = email;
-
   const handleOnChange = (value: string) => {
+    validateEmail(value);
     ScreenStore.update((s) => {
       s.email = value;
     });
-    newEmail = value;
-    validateInputs();
   };
-
-  React.useEffect(() => {
-    validateInputs();
-  }, []);
-
   const handleSubmit = () => {
-    if (isEmailValid) {
-      ScreenStore.update((s) => {
-        s.email = newEmail;
-        s.progress += 1;
-      });
-    }
+    // if (isEmailValid) {
+      onEmailConfirmed();
+    // }
   };
+
+  useEffect(() => {
+    validateEmail(email);
+  }, [email]);
 
   return (
     <View style={style.container}>
@@ -69,7 +62,7 @@ const VerifyEmailModal = () => {
         error={errorMessage}
         onFocus={() => setErrorMessage("")}
       />
-      <AuthBtn title="Confirm email" onPress={() => handleSubmit()} />
+      <AuthBtn title="Confirm email" onPress={handleSubmit} />
     </View>
   );
 };

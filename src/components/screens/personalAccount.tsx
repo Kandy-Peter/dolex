@@ -19,6 +19,8 @@ const PersonalAccount = () => {
     isLoading: false,
   };
 
+  const information = ScreenStore.useState();
+
   const inputsData = {
     full_name: "",
     email: "",
@@ -65,7 +67,12 @@ const PersonalAccount = () => {
       s.password = inputs.password;
       s.password_confirmation = inputs.password_confirmation;
       s.termsAccepted = inputs.termsAccepted;
-      // s.progress += 1;
+    });
+  };
+
+  const handleEmailConfirmed = () => {
+    ScreenStore.update((s) => {
+      s.progress += 1;
     });
   };
 
@@ -78,7 +85,7 @@ const PersonalAccount = () => {
   };
 
   const handleSubmit = async () => {
-    const isValid = await validateInputs();
+    const isValid = true; //await validateInputs();
     if (isValid) {
       saveCredentials();
       setIsVerifyEmailModalVisible(true);
@@ -98,7 +105,10 @@ const PersonalAccount = () => {
     <View style={style.container}>
       <Loader isLoading={isLoading} />
       {isVerifyEmailModalVisible ? (
-        <VerifyEmailModal />
+        <VerifyEmailModal
+          onEmailConfirmed={handleEmailConfirmed}
+          email={information.email}
+        />
       ) : (
         <View style={style.formContainer}>
           <Text style={style.subTitle}>Enter your credentials</Text>
