@@ -1,5 +1,6 @@
+import { Ionicons } from "@expo/vector-icons";
 import React, { useState, useRef, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import OTPTextView from "react-native-otp-textinput";
 
 import AuthBtn from "../common/Buttons/authBtn";
@@ -15,7 +16,7 @@ const VerifyForm = () => {
 
   const input = useRef<OTPTextView>(null);
 
-  const clear = () => input.current?.clear();
+  // const clear = () => input.current?.clear();
 
   useEffect(() => {
     if (countdown === 0) {
@@ -34,12 +35,15 @@ const VerifyForm = () => {
     setResendDisabled(true);
     setCountdown(30);
   };
+  const handlePreviousScreen = () => {
+    ScreenStore.update((s) => {
+      s.progress -= 1;
+    });
+  };
 
   const handleTextChange = (text: string) => {
     setOtpInput(text);
   };
-
-  console.log(resendDisabled);
 
   return (
     <View style={styles.container}>
@@ -84,6 +88,20 @@ const VerifyForm = () => {
         </Text>
       </Text>
       <AuthBtn onPress={() => {}} title="Verify email" />
+      <TouchableOpacity
+        style={{ alignItems: "center", justifyContent: "center" }}
+        onPress={handlePreviousScreen}
+      >
+        <Text style={styles.backBtn}>
+          <Ionicons
+            name="chevron-back"
+            size={20}
+            style={{ marginTop: 5 }}
+            color={COLORS.primary}
+          />
+          Back
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -102,6 +120,12 @@ const styles = {
   roundedTextInput: {
     width: 60,
     height: 60,
+  },
+  backBtn: {
+    color: COLORS.primary,
+    marginTop: 20,
+    fontFamily: FONT.bold,
+    fontSize: 18,
   },
 };
 

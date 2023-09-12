@@ -15,7 +15,7 @@ const RenderStepIndicator = (information: IProps) => {
   return (
     <View style={style.container}>
       {[...Array(totalSteps)].map((_, index) => (
-        <View style={style.stepContainer}>
+        <View key={index} style={style.stepContainer}>
           <View
             key={index}
             style={{

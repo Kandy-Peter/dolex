@@ -1,10 +1,9 @@
 import RenderStepIndicator from "components/common/setpIndicator";
 import AccountType from "components/screens/AccountType";
-import Credentials from "components/screens/Credentials";
 import ForexDetails from "components/screens/ForexDetails";
 import VerifyForm from "components/screens/VerifyForm";
 import PersonalAccount from "components/screens/personalAccount";
-import { Button, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 import { ScreenStore } from "@/stores/screenStore";
 
@@ -38,17 +37,16 @@ const SignIn = () => {
 
   const renderStepComponents = () => {
     if (information.progress === 0) {
-      return <AccountType />;
+      // return <AccountType />;
+      return <ForexDetails />
+    } else if (information.progress === 1) {
+      return <PersonalAccount />;
     } else if (information.user_type === "normal_user") {
-      if (information.progress === 1) {
-        return <PersonalAccount />;
-      } else if (information.progress === 2) {
+      if (information.progress === 2) {
         return <VerifyForm />;
       }
     } else if (information.user_type === "forex_bureau") {
-      if (information.progress === 1) {
-        return <Credentials />;
-      } else if (information.progress === 2) {
+      if (information.progress === 2) {
         return <ForexDetails />;
       } else if (information.progress === 3) {
         return <VerifyForm />;

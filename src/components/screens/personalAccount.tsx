@@ -1,9 +1,9 @@
-import { Link } from "expo-router";
 import { useState } from "react";
 import { Text, View, StyleSheet } from "react-native";
 
 import CheckBox from "../common/Fieds/checkBox";
 import VerifyEmailModal from "../common/modal/formModal";
+import TermsAndConditonLabel from "../common/outsideLinks/termsAndConditions";
 
 import AuthBtn from "@/components/common/Buttons/authBtn";
 import Input from "@/components/common/Fieds/Inputs/input";
@@ -54,7 +54,6 @@ const PersonalAccount = () => {
       validationErrors.inner.forEach((error: any) => {
         newErrors[error.path] = error.message;
       });
-      // Set the validation errors
       setErrors(newErrors);
       return false;
     }
@@ -85,21 +84,14 @@ const PersonalAccount = () => {
   };
 
   const handleSubmit = async () => {
-    const isValid = true; //await validateInputs();
+    const isValid = await validateInputs();
     if (isValid) {
       saveCredentials();
       setIsVerifyEmailModalVisible(true);
     }
   };
 
-  const termsAndConditonLabel = (
-    <Text style={style.label}>
-      I agree to the Mago Terms and Conditions.{" "}
-      <Link href="https://google.com" style={style.link}>
-        <Text style={style.link}>Learn more</Text>
-      </Link>
-    </Text>
-  );
+  const isANormalAccount = information.user_type === "normal_user";
 
   return (
     <View style={style.container}>
@@ -145,12 +137,14 @@ const PersonalAccount = () => {
               }
               onFocus={() => handleErrors("password_confirmation", "")}
             />
-            <CheckBox
-              label={termsAndConditonLabel}
-              value={inputs.termsAccepted}
-              onChange={(value: boolean) => handleCheckBox(value)}
-              error={errors.termsAccepted}
-            />
+            {isANormalAccount && (
+              <CheckBox
+                label={TermsAndConditonLabel()}
+                value={inputs.termsAccepted}
+                onChange={(value: boolean) => handleCheckBox(value)}
+                error={errors.termsAccepted}
+              />
+            )}
             <View style={style.buttonContainer}>
               <AuthBtn
                 title="Create Account"
