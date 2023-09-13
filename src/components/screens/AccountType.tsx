@@ -1,9 +1,11 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 
 import { COLORS, FONT, SIZES } from "@/constants/theme";
+import supportedCountries from "@/helpers/supportedCountries";
 import { ScreenStore } from "@/stores/screenStore";
 
 const AccountType = () => {
+  const { country } = ScreenStore.useState();
   const selectAccountType = (type: string) => {
     ScreenStore.update((s) => {
       s.user_type = type;
@@ -34,7 +36,9 @@ const AccountType = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={style.button}
-          onPress={() => selectAccountType("forex_bureau")}
+          onPress={() =>
+            supportedCountries(country) && selectAccountType("forex_bureau")
+          }
         >
           <View style={style.icon}>
             <Image
