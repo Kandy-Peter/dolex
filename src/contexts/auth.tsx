@@ -25,7 +25,7 @@ export function SessionProvider(props: ISessionProps) {
       value={{
         signIn: () => {
           // Perform sign-in logic here
-          setSession("xxx");
+          setSession("session");
         },
         signOut: () => {
           setSession(null);

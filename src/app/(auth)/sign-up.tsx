@@ -46,11 +46,6 @@ const SignIn = () => {
           user_type: information.user_type,
         })}
       {renderStepComponents()}
-      {/* <Button title="Previous" onPress={handlePrevious} />
-      <Button
-        title={lastStep() ? "Finish" : "Next"}
-        onPress={lastStep() ? () => {} : handleNext}
-      /> */}
     </View>
   );
 };

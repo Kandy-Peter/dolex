@@ -6,6 +6,7 @@ import VerifyEmailModal from "../common/modal/formModal";
 import TermsAndConditonLabel from "../common/outsideLinks/termsAndConditions";
 
 import AuthBtn from "@/components/common/Buttons/authBtn";
+import CancelBtn from "@/components/common/Buttons/cancelBtn";
 import Input from "@/components/common/Fieds/Inputs/input";
 import Loader from "@/components/common/Loader";
 import { COLORS, FONT, SIZES } from "@/constants/theme";

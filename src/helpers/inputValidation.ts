@@ -26,6 +26,11 @@ const authSchema = (termsRequired: boolean) => {
   return schema;
 };
 
+const LoginSchema = yup.object().shape({
+  email: yup.string().email("Invalid email").required("Email is required"),
+  password: yup.string().required("Password is required"),
+});
+
 const forexSChema = yup.object().shape({
   forex_bureau_name: yup
     .string()
@@ -42,5 +47,6 @@ const forexSChema = yup.object().shape({
 
 export default {
   authSchema,
+  LoginSchema,
   forexSChema,
 };

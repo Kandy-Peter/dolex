@@ -1,9 +1,9 @@
-import { Ionicons } from "@expo/vector-icons";
 import React, { useState, useRef, useEffect } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text } from "react-native";
 import OTPTextView from "react-native-otp-textinput";
 
 import AuthBtn from "../common/Buttons/authBtn";
+import CancelBtn from "../common/Buttons/cancelBtn";
 
 import { COLORS, FONT, SIZES } from "@/constants/theme";
 import { ScreenStore } from "@/stores/screenStore";
@@ -86,20 +86,7 @@ const VerifyForm = () => {
         </Text>
       </Text>
       <AuthBtn onPress={() => {}} title="Verify email" />
-      <TouchableOpacity
-        style={{ alignItems: "center", justifyContent: "center" }}
-        onPress={handlePreviousScreen}
-      >
-        <Text style={styles.backBtn}>
-          <Ionicons
-            name="chevron-back"
-            size={20}
-            style={{ marginTop: 5 }}
-            color={COLORS.primary}
-          />
-          Back
-        </Text>
-      </TouchableOpacity>
+      <CancelBtn />
     </View>
   );
 };
@@ -118,12 +105,6 @@ const styles = {
   roundedTextInput: {
     width: 60,
     height: 60,
-  },
-  backBtn: {
-    color: COLORS.primary,
-    marginTop: 20,
-    fontFamily: FONT.bold,
-    fontSize: 18,
   },
 };
 

@@ -9,6 +9,7 @@ import Input from "@/components/common/Fieds/Inputs/input";
 import Loader from "@/components/common/Loader";
 import { useSession } from "@/contexts/auth";
 import { clearInformation } from "@/stores/screenStore";
+import Validations from "@/helpers/inputValidation";
 
 export default function SignIn() {
   const { session, isLoading, signIn } = useSession() ?? {
@@ -26,25 +27,35 @@ export default function SignIn() {
     setErrors((prev: any) => ({ ...prev, [name]: value }));
   };
 
-  const validate = async () => {
-    Keyboard.dismiss();
-    let isValid = true;
-
-    if (!inputs.email) {
-      isValid = false;
-      handleErrors("email", "Email is required");
+  const validateInputs = async () => {
+    try {
+      await Validations.LoginSchema.validate(inputs, { abortEarly: false });
+      setErrors({
+        email: "",
+        password: "",
+      });
+      return true;
+    } catch (validationErrors: any) {
+      const newErrors = {} as any;
+      validationErrors.inner.forEach((error: any) => {
+        newErrors[error.path] = error.message;
+      });
+      setErrors(newErrors);
+      return false;
     }
-
-    if (!inputs.password) {
-      isValid = false;
-      handleErrors("password", "Password is required");
-    }
-
-    return isValid;
   };
 
   const handleOnChange = (name: string, value: string) => {
     setInputs((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleOnSubmit = async () => {
+    Keyboard.dismiss();
+    const isValid = await validateInputs();
+    if (isValid) {
+      alert("login SUCCESSFUL")
+      session && signIn();
+    }
   };
 
   return (
@@ -72,7 +83,7 @@ export default function SignIn() {
             <Text style={style.forgotPasswordText}>Forgot password?</Text>
           </View>
           <View style={style.buttonContainer}>
-            <AuthBtn title="Sign in" onPress={() => {}} />
+            <AuthBtn title="Sign in" onPress={handleOnSubmit} />
           </View>
           <View style={style.singUplink}>
             <Text style={{}}>Forgot password?</Text>
