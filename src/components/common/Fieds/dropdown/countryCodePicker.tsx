@@ -10,17 +10,21 @@ interface IInput {
   value: string;
   onFocus?: (ev: any) => void;
   onChangeText: (text: string) => void;
+  defaultCountryCode?: string;
 }
 
 const CountryCodeInput = ({
   value,
   error,
   onChangeText,
+  defaultCountryCode = "RW",
   onFocus = () => {},
   ...props
 }: IInput) => {
-  const [countryCode, setCountryCode] = useState<CountryCode>("RW");
-  const [country, setCountry] = useState<Country | null>(null);
+  const initialCountryCode = defaultCountryCode.toUpperCase() as CountryCode;
+
+  const [countryCode, setCountryCode] =
+    useState<CountryCode>(initialCountryCode);
   const [isFocused, setIsFocused] = React.useState(false);
 
   const handleFocus = (ev: any) => {

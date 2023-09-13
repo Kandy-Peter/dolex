@@ -30,11 +30,14 @@ const ForexDetails = () => {
     forex_bureau_name: "",
     country: "",
     phone_number: "",
-    prefered_currencies: [] as {code:string}[],
+    prefered_currencies: [] as { code: string }[],
     termsAccepted: false,
   };
 
-  const [inputs, setInputs] = useState(inputsData);
+  const [inputs, setInputs] = useState({
+    ...inputsData,
+    country: information.country.country,
+  });
   const [errors, setErrors] = useState<any | null>(inputsData);
   const [country, setCountry] = useState<string>();
   const [isVerifyEmailModalVisible, setIsVerifyEmailModalVisible] =
@@ -69,7 +72,7 @@ const ForexDetails = () => {
     ScreenStore.update((s) => {
       s.forex_bureau_name = inputs.forex_bureau_name;
       s.phone_number = inputs.phone_number;
-      s.country = inputs.country;
+      s.country.country = inputs.country;
       s.prefered_currencies = inputs.prefered_currencies;
       s.termsAccepted = inputs.termsAccepted;
     });
@@ -127,6 +130,7 @@ const ForexDetails = () => {
               data={COUNTRIES}
               error={errors.country}
               onFocus={() => handleErrors("country", "")}
+              defaultValue={information.country.country}
               onSelect={(item: any) => {
                 setCountry(item.name);
                 handleOnChange("country", item.name);
@@ -139,6 +143,7 @@ const ForexDetails = () => {
               onChangeText={(text: string) => {
                 setInputs((prev) => ({ ...prev, phone_number: text }));
               }}
+              defaultCountryCode={information.country.countryCode}
             />
             <MultiSelectDropdown
               name="Prefered Currencies"

@@ -16,8 +16,6 @@ const VerifyForm = () => {
 
   const input = useRef<OTPTextView>(null);
 
-  // const clear = () => input.current?.clear();
-
   useEffect(() => {
     if (countdown === 0) {
       setResendDisabled(false);

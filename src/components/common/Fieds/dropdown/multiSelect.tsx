@@ -98,12 +98,12 @@ const MultiSelectDropdown: FC<Props> = ({
               renderItem={renderCheckBoxItem}
               keyExtractor={(item, index) => index.toString()}
             />
-            <TouchableOpacity onPress={() => onSelectCallback(selectedItems)}>
+            <TouchableOpacity>
               <Text
                 style={styles.selectButton}
-                onPress={() => setVisible(false)}
+                onPress={() => onSelectCallback(selectedItems)}
               >
-                Select
+                Done
               </Text>
             </TouchableOpacity>
           </View>
@@ -196,10 +196,10 @@ const styles = StyleSheet.create({
     marginHorizontal: SIZES.medium,
   },
   selectButton: {
-    marginTop: 10,
+    marginVertical: 10,
     color: COLORS.primary,
     fontFamily: FONT.bold,
-    fontSize: 16,
+    fontSize: 18,
     textAlign: "center",
   },
 });

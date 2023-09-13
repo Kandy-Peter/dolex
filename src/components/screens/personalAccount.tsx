@@ -20,6 +20,7 @@ const PersonalAccount = () => {
   };
 
   const information = ScreenStore.useState();
+  const isANormalAccount = information.user_type === "normal_user";
 
   const inputsData = {
     full_name: "",
@@ -39,8 +40,11 @@ const PersonalAccount = () => {
   };
 
   const validateInputs = async () => {
+    const termsRequired = !!isANormalAccount;
     try {
-      await Validations.authSchema.validate(inputs, { abortEarly: false });
+      await Validations.authSchema(termsRequired).validate(inputs, {
+        abortEarly: false,
+      });
       setErrors({
         full_name: "",
         email: "",
@@ -66,6 +70,7 @@ const PersonalAccount = () => {
       s.password = inputs.password;
       s.password_confirmation = inputs.password_confirmation;
       s.termsAccepted = inputs.termsAccepted;
+      !isANormalAccount && (s.progress += 1);
     });
   };
 
@@ -91,12 +96,10 @@ const PersonalAccount = () => {
     }
   };
 
-  const isANormalAccount = information.user_type === "normal_user";
-
   return (
     <View style={style.container}>
       <Loader isLoading={isLoading} />
-      {isVerifyEmailModalVisible ? (
+      {isANormalAccount && isVerifyEmailModalVisible ? (
         <VerifyEmailModal
           onEmailConfirmed={handleEmailConfirmed}
           email={information.email}

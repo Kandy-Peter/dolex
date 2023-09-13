@@ -14,7 +14,6 @@ const SignIn = () => {
   const renderStepComponents = () => {
     if (information.progress === 0) {
       return <AccountType />;
-      // return <ForexDetails />;
     } else if (information.progress === 1) {
       return <PersonalAccount />;
     } else if (information.user_type === "normal_user") {

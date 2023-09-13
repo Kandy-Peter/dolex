@@ -1,4 +1,4 @@
-import { Alert } from "react-native";
+import { Alert, Linking } from "react-native";
 
 import { ScreenStore } from "@/stores/screenStore";
 import { COUNTRIES } from "@/utils/countries";
@@ -14,11 +14,21 @@ const supportedCountries = (country: {
       "We need to know your location to proceed with the registration",
       [
         {
+          text: "Cancel",
+          onPress: () => {
+            ScreenStore.update((s) => {
+              s.progress = 0;
+            });
+          }
+        },
+        {
           text: "Set Location",
           onPress: () => {
             ScreenStore.update((s) => {
               s.progress = 0;
             });
+
+            Linking.openSettings();
           },
         },
       ],

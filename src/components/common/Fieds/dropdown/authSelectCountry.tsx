@@ -18,12 +18,20 @@ interface Props {
   onSelect: (item: { label: string; value: string }) => void;
   error: string;
   onFocus?: (ev: any) => void;
+  defaultValue?: string;
 }
 
-const Dropdown: FC<Props> = ({ name, data, onSelect, error, onFocus }) => {
+const Dropdown: FC<Props> = ({
+  name,
+  data,
+  onSelect,
+  error,
+  onFocus,
+  defaultValue = null,
+}) => {
   const DropdownButton = useRef<any>(null);
   const [visible, setVisible] = useState(false);
-  const [selected, setSelected] = useState<any>(null);
+  const [selected, setSelected] = useState<any>({ name: defaultValue });
   const [dropdownTop, setDropdownTop] = useState(0);
 
   const toggleDropdown = (): void => {
