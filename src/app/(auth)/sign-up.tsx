@@ -3,6 +3,7 @@ import AccountType from "components/screens/AccountType";
 import ForexDetails from "components/screens/ForexDetails";
 import VerifyForm from "components/screens/VerifyForm";
 import PersonalAccount from "components/screens/personalAccount";
+import React from "react";
 import { Text, View } from "react-native";
 
 import { ScreenStore } from "@/stores/screenStore";
@@ -10,35 +11,10 @@ import { ScreenStore } from "@/stores/screenStore";
 const SignIn = () => {
   const information = ScreenStore.useState();
 
-  const handleNext = () => {
-    // TODO Add validation logic here if needed
-    if (information.progress < 3) {
-      ScreenStore.update((s) => {
-        s.progress += 1;
-      });
-    }
-  };
-
-  const handlePrevious = () => {
-    if (information.progress > 0) {
-      ScreenStore.update((s) => {
-        s.progress -= 1;
-      });
-    }
-  };
-
-  const lastStep = () => {
-    if (information.user_type === "normal_user") {
-      return information.progress === 2;
-    } else if (information.user_type === "forex_bureau") {
-      return information.progress === 3;
-    }
-  };
-
   const renderStepComponents = () => {
     if (information.progress === 0) {
       // return <AccountType />;
-      return <ForexDetails />
+      return <ForexDetails />;
     } else if (information.progress === 1) {
       return <PersonalAccount />;
     } else if (information.user_type === "normal_user") {

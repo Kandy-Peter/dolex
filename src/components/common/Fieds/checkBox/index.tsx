@@ -1,6 +1,6 @@
 import Checkbox from "expo-checkbox";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import { COLORS } from "@/constants/theme";
 
@@ -13,7 +13,7 @@ interface ICheckBox {
 
 const CheckBox = ({ label, value, onChange, error }: ICheckBox) => {
   return (
-    <>
+    <Pressable onPress={() => onChange(!value)}>
       <View style={style.container}>
         <Checkbox
           style={style.checkbox}
@@ -23,7 +23,7 @@ const CheckBox = ({ label, value, onChange, error }: ICheckBox) => {
         <Text style={style.label}>{label}</Text>
       </View>
       <Text style={{ color: "red", fontSize: 10 }}>{error}</Text>
-    </>
+    </Pressable>
   );
 };
 

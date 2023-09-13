@@ -10,7 +10,7 @@ import Input from "@/components/common/Fieds/Inputs/input";
 import Loader from "@/components/common/Loader";
 import { COLORS, FONT, SIZES } from "@/constants/theme";
 import { useSession } from "@/contexts/auth";
-import schemaValidations from "@/helpers/inputValidation";
+import Validations from "@/helpers/inputValidation";
 import { ScreenStore } from "@/stores/screenStore";
 
 const PersonalAccount = () => {
@@ -40,7 +40,7 @@ const PersonalAccount = () => {
 
   const validateInputs = async () => {
     try {
-      await schemaValidations.validate(inputs, { abortEarly: false });
+      await Validations.authSchema.validate(inputs, { abortEarly: false });
       setErrors({
         full_name: "",
         email: "",

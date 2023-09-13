@@ -1,13 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import EditScreenInfo from "@/components/EditScreenInfo";
-
 export default function TabTradeScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Trade</Text>
       <View style={styles.separator} />
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
     </View>
   );
 }

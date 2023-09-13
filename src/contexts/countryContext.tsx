@@ -3,10 +3,12 @@ import { useState, createContext, useEffect } from "react";
 const CountryContext = createContext({
   selectedCountry: "",
   handleCountryChange: (value: string) => {},
+  userCountry: "",
 });
 
 const CountryProvider = ({ children }: any) => {
   const [selectedCountry, setSelectedCountry] = useState("RWA");
+  let userCountry = "";
 
   const getCountryFromLocation = async () => {
     try {
@@ -24,6 +26,7 @@ const CountryProvider = ({ children }: any) => {
       const data = await response.json();
       const country = data.countryCode;
       setSelectedCountry(country);
+      userCountry = country;
     } catch (error) {
       console.log(error);
     }
@@ -42,6 +45,7 @@ const CountryProvider = ({ children }: any) => {
       value={{
         selectedCountry,
         handleCountryChange,
+        userCountry,
       }}
     >
       {children}

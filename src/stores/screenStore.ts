@@ -9,7 +9,7 @@ export const ScreenStore = new Store({
   phone_number: "",
   forex_bureau_name: "",
   forex_bureau_address: "",
-  prefered_currencies: [],
+  prefered_currencies: [] as { code: string }[],
   country: "",
   termsAccepted: false,
   progress: 0,

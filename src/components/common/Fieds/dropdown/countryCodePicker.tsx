@@ -19,7 +19,7 @@ const CountryCodeInput = ({
   onFocus = () => {},
   ...props
 }: IInput) => {
-  const [countryCode, setCountryCode] = useState<CountryCode>("UG");
+  const [countryCode, setCountryCode] = useState<CountryCode>("RW");
   const [country, setCountry] = useState<Country | null>(null);
   const [isFocused, setIsFocused] = React.useState(false);
 
@@ -46,7 +46,6 @@ const CountryCodeInput = ({
           countryCode={countryCode}
           withFilter
           withFlag
-          // withCountryNameButton
           withCallingCode
           withCallingCodeButton
           withEmoji
@@ -60,10 +59,11 @@ const CountryCodeInput = ({
           style={{ flex: 1, color: COLORS.darkGray, paddingLeft: 10 }}
           placeholder="Phone number"
           placeholderTextColor={COLORS.gray}
+          inputMode="tel"
           value={value}
           onFocus={handleFocus}
-          key={value}
           onBlur={() => setIsFocused(false)}
+          onChangeText={(text) => onChangeText(text)}
           {...props}
         />
       </View>

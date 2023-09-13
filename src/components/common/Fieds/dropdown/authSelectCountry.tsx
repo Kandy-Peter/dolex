@@ -1,5 +1,4 @@
 import { AntDesign } from "@expo/vector-icons";
-import PhoneInput from "react-native-phone-input";
 import React, { FC, ReactElement, useRef, useState } from "react";
 import {
   FlatList,
@@ -17,16 +16,22 @@ interface Props {
   name: string;
   data: { name: string; value: string; icon: any }[];
   onSelect: (item: { label: string; value: string }) => void;
+  error: string;
+  onFocus?: (ev: any) => void;
 }
 
-const Dropdown: FC<Props> = ({ name, data, onSelect }) => {
+const Dropdown: FC<Props> = ({ name, data, onSelect, error, onFocus }) => {
   const DropdownButton = useRef<any>(null);
   const [visible, setVisible] = useState(false);
-  const [selected, setSelected] = useState<any>(undefined);
+  const [selected, setSelected] = useState<any>(null);
   const [dropdownTop, setDropdownTop] = useState(0);
 
   const toggleDropdown = (): void => {
-    visible ? setVisible(false) : openDropdown();
+    if (visible) {
+      setVisible(false);
+    } else {
+      openDropdown();
+    }
   };
 
   const openDropdown = (): void => {
@@ -79,19 +84,21 @@ const Dropdown: FC<Props> = ({ name, data, onSelect }) => {
   };
 
   return (
-    <><TouchableOpacity
-      ref={DropdownButton}
-      style={styles.button}
-      onPress={toggleDropdown}
-    >
-      {renderDropdown()}
-      <Text style={styles.buttonText}>
-        {(!!selected && capitalizeFirstLetter(selected.name)) ||
-          capitalizeFirstLetter(name)}
-      </Text>
-      <AntDesign name="caretdown" size={20} color={COLORS.gray} />
+    <>
+      <TouchableOpacity
+        ref={DropdownButton}
+        style={styles.button}
+        onPress={toggleDropdown}
+        onFocus={onFocus}
+      >
+        {renderDropdown()}
+        <Text style={styles.buttonText}>
+          {(!!selected && capitalizeFirstLetter(selected.name)) ||
+            capitalizeFirstLetter(name)}
+        </Text>
+        <AntDesign name="caretdown" size={20} color={COLORS.gray} />
       </TouchableOpacity>
-      {/* <Text style={{ color: "red", fontSize: 12 }}>{error}</Text> */}
+      <Text style={{ color: "red", fontSize: 12 }}>{error}</Text>
     </>
   );
 };
@@ -107,7 +114,6 @@ const styles = StyleSheet.create({
     height: 50,
     zIndex: 1,
     paddingHorizontal: 10,
-    marginBottom: 12,
   },
   buttonText: {
     flex: 1,

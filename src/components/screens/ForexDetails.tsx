@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Text, View, StyleSheet } from "react-native";
 
 import CheckBox from "../common/Fieds/checkBox";
-import Dropdown from "../common/Fieds/dropdown/authSelect";
+import Dropdown from "../common/Fieds/dropdown/authSelectCountry";
 import CountryCodeInput from "../common/Fieds/dropdown/countryCodePicker";
+import MultiSelectDropdown from "../common/Fieds/dropdown/multiSelect";
 import VerifyEmailModal from "../common/modal/formModal";
 import TermsAndConditonLabel from "../common/outsideLinks/termsAndConditions";
 
@@ -15,6 +16,7 @@ import { useSession } from "@/contexts/auth";
 import Validations from "@/helpers/inputValidation";
 import { ScreenStore } from "@/stores/screenStore";
 import { COUNTRIES } from "@/utils/countries";
+import { CURRENCIES } from "@/utils/currencies";
 
 const ForexDetails = () => {
   const { session, isLoading, signIn } = useSession() ?? {
@@ -28,7 +30,7 @@ const ForexDetails = () => {
     forex_bureau_name: "",
     country: "",
     phone_number: "",
-    prefered_currencies: [],
+    prefered_currencies: [] as {code:string}[],
     termsAccepted: false,
   };
 
@@ -87,6 +89,10 @@ const ForexDetails = () => {
     setInputs((prev) => ({ ...prev, termsAccepted: value }));
   };
 
+  const handleSelectCurrency = (selectedItems: { code: string }[]) => {
+    setInputs((prev) => ({ ...prev, prefered_currencies: selectedItems }));
+  };
+
   const handleSubmit = async () => {
     const isValid = await validateInputs();
     if (isValid) {
@@ -105,7 +111,7 @@ const ForexDetails = () => {
         />
       ) : (
         <View style={style.formContainer}>
-          <Text style={style.subTitle}>Enter your credentials</Text>
+          <Text style={style.subTitle}>Forex bureau details</Text>
           <View style={style.inputContainer}>
             <Input
               placeHolder="Bureau Name"
@@ -119,27 +125,29 @@ const ForexDetails = () => {
             <Dropdown
               name="Country"
               data={COUNTRIES}
+              error={errors.country}
+              onFocus={() => handleErrors("country", "")}
               onSelect={(item: any) => {
-                setCountry(item.value);
-                handleOnChange("country", item.value);
+                setCountry(item.name);
+                handleOnChange("country", item.name);
               }}
             />
             <CountryCodeInput
               error={errors.phone_number}
               value={inputs.phone_number}
-              onChangeText={(text: string) =>
-                handleOnChange("phone_number", text)
-              }
               onFocus={() => handleErrors("phone_number", "")}
+              onChangeText={(text: string) => {
+                setInputs((prev) => ({ ...prev, phone_number: text }));
+              }}
             />
-            <Input
-              placeHolder="Prefered Currencies"
+            <MultiSelectDropdown
+              name="Prefered Currencies"
+              data={CURRENCIES}
               error={errors.prefered_currencies}
-              value="inputs.prefered_currencies"
-              onChangeText={(text: string) =>
-                handleOnChange("prefered_currencies", text)
-              }
               onFocus={() => handleErrors("prefered_currencies", "")}
+              onSelect={(selectedCurrencies: any) =>
+                handleSelectCurrency(selectedCurrencies)
+              }
             />
             <CheckBox
               label={TermsAndConditonLabel()}
