@@ -1,13 +1,13 @@
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Tabs } from "expo-router";
+import { Tabs, Redirect } from "expo-router";
 import { View, Text } from "react-native";
 
-import styles from "../../src/assets/styles/tabs.style";
-
-// import ScreenHeaderBtn from "@/components/common/header/ScreenHeaderBtn";
-import CountrySelect from "@/components/dropdown/country_select";
+import styles from "@/assets/styles/tabs.style";
+import CountrySelect from "@/components/common/Fieds/dropdown/country_select";
+import Loader from "@/components/common/Loader";
 import { COLORS } from "@/constants/theme";
+import { useSession } from "@/contexts/auth";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
@@ -17,7 +17,20 @@ function TabBarIcon(props: {
   return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
 }
 
-export default function TabLayout() {
+export default function AppLayout() {
+  const { session, isLoading } = useSession() ?? {
+    session: null,
+    isLoading: false,
+  };
+
+  if (isLoading) {
+    return <Loader isLoading={isLoading} />;
+  }
+
+  if (!session) {
+    return <Redirect href="/onboarding" />;
+  }
+
   return (
     <Tabs
       screenOptions={{

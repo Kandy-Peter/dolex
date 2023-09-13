@@ -3,9 +3,11 @@ import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
-import { View } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
+import { SessionProvider } from "@/contexts/auth";
 import { CountryProvider } from "@/contexts/countryContext";
+import { useLocation } from "@/helpers/getLocation";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -22,13 +24,15 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    DMlightLato: require("./../src/assets/fonts/Lato-Light.ttf"),
-    DMregularLato: require("./../src/assets/fonts/Lato-Regular.ttf"),
-    DMboldLato: require("./../src/assets/fonts/Lato-Bold.ttf"),
-    DMblackLato: require("./../src/assets/fonts/Lato-Black.ttf"),
-    DMAudiowide: require("./../src/assets/fonts/Audiowide-Regular.ttf"),
+    DMlightLato: require("@/assets/fonts/Lato-Light.ttf"),
+    DMregularLato: require("@/assets/fonts/Lato-Regular.ttf"),
+    DMboldLato: require("@/assets/fonts/Lato-Bold.ttf"),
+    DMblackLato: require("@/assets/fonts/Lato-Black.ttf"),
+    DMAudiowide: require("@/assets/fonts/Audiowide-Regular.ttf"),
     ...FontAwesome.font,
   });
+
+  const userLocation = useLocation();
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
@@ -49,7 +53,6 @@ export default function RootLayout() {
     <View
       style={{
         flex: 1,
-        // backgroundColor: "#D62645",
       }}
     >
       <StatusBar style="light" />
@@ -60,11 +63,19 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   return (
-    <CountryProvider>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-      </Stack>
-    </CountryProvider>
+    <SessionProvider>
+      <CountryProvider>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            headerTitle: "",
+            headerShadowVisible: false,
+          }}
+        >
+          <Stack.Screen name="(app)" options={{ headerShown: false }} />
+          <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+        </Stack>
+      </CountryProvider>
+    </SessionProvider>
   );
 }

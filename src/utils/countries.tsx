@@ -38,7 +38,7 @@ export const COUNTRIES = [
   {
     label: "DRC",
     value: "DRC",
-    name: "drc",
+    name: "congo(kinshasa)",
     icon: () => (
       <Image
         source={{ uri: "https://www.countryflagicons.com/FLAT/64/CD.png" }}
