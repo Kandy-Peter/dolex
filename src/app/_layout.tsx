@@ -7,6 +7,7 @@ import { View, StyleSheet, Text } from "react-native";
 
 import { SessionProvider } from "@/contexts/auth";
 import { CountryProvider } from "@/contexts/countryContext";
+import { useLocation } from "@/helpers/getLocation";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -31,6 +32,8 @@ export default function RootLayout() {
     ...FontAwesome.font,
   });
 
+  const userLocation = useLocation();
+
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
@@ -39,7 +42,6 @@ export default function RootLayout() {
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
-      // defaultFont();
     }
   }, [loaded]);
 
